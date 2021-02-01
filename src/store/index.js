@@ -97,6 +97,9 @@ export default new Vuex.Store({
             )
           }`;
         axios.post(apiUrl, { query }).then(response => {
+          const token = response.data.data.signup;
+          localStorage.setItem('access_token', token);
+          context.commit('retrieveToken', token);
           resolve(response);
         })
         .catch(error => {

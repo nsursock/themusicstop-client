@@ -516,8 +516,8 @@ export default {
   },
 
   updated() {
-    if (this.isLoggedIn)
-      this.displayLoggedIn();
+    // if (this.isLoggedIn)
+    //   this.displayLoggedIn();
   },
 
   methods: {
@@ -546,13 +546,14 @@ export default {
         this.loggedInProfileImg = response.data.data.userById.profileImage;
       }).catch(error => {
         console.log(error);
+        this.handleLogout();
       });
     },
 
     handleLogout: function() {
       this.$store.dispatch('destroyToken')
         .then( () => {
-          this.$router.push({ name: 'Home' })
+          this.$router.push('/')
         }).catch(err => console.log(err));
     },
     handleLogin: function() {
