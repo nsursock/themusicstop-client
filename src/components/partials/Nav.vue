@@ -507,6 +507,10 @@ export default {
     bus.$on('start', () => {
       this.toggleModal();
       this.showSignup = true;
+    });
+    bus.$on('closeMenu', () => {
+      this.showMemberMenu = false;
+      this.showMobileMenu = false;
     })
   },
 

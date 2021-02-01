@@ -100,7 +100,8 @@
         From: "opacity-100"
         To: "opacity-0"
     -->
-    <div v-show="showProfileSlide" class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+    <div v-show="showProfileSlide" @click="showProfileSlide = false"
+    class="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
     <section class="absolute inset-y-0 right-0 pl-10 max-w-full flex" aria-labelledby="slide-over-heading">
       <!--
         Slide-over panel, show/hide based on slide-over state.
