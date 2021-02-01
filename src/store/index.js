@@ -39,7 +39,7 @@ export default new Vuex.Store({
               password: "${credentials.password}"
             })
           }`;
-        axios.post(apiUrl, { query }).then(response => {
+        axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
           if (response.data.errors) {
             reject(response);
           } else
@@ -68,7 +68,7 @@ export default new Vuex.Store({
               password: "${credentials.password}"
             })
           }`;
-        axios.post(apiUrl, { query }).then(response => {
+        axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
           const token = response.data.data.login;
           localStorage.setItem('access_token', token);
           context.commit('retrieveToken', token);
@@ -96,7 +96,7 @@ export default new Vuex.Store({
               }
             )
           }`;
-        axios.post(apiUrl, { query }).then(response => {
+        axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
           const token = response.data.data.signup;
           localStorage.setItem('access_token', token);
           context.commit('retrieveToken', token);

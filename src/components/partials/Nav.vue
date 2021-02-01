@@ -541,7 +541,7 @@ export default {
             profileImage
           }
         }`;
-      axios.post(apiUrl, { query }).then(response => {
+      axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
         this.loggedInEmail = response.data.data.userById.email;
         this.loggedInProfileImg = response.data.data.userById.profileImage;
       }).catch(error => {
@@ -597,7 +597,7 @@ export default {
           }
         }`;
       try {
-        await axios.post(apiUrl, { query });
+        await axios.post(process.env.VUE_APP_API || apiUrl, { query });
       } catch(error) {
         console.log(error);
       }
@@ -610,7 +610,7 @@ export default {
             id: "${this.$store.getters.loggedInUserId}",
             password: "${this.password1}")
         }`;
-      axios.post(apiUrl, { query }).then(response => {
+      axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
         console.log(response.data);
       }).catch(error => {
         console.log(error);

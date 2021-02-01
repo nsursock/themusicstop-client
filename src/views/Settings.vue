@@ -487,7 +487,7 @@ export default {
             coverImage
           }
         }`;
-      axios.post(apiUrl, { query }).then(response => {
+      axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
         let data = response.data.data.userById;
         this.website = data.website;
         this.about = data.about;
@@ -523,7 +523,7 @@ export default {
             recordId
           }
       }`;
-      axios.post(apiUrl, { query }).then(response => {
+      axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
         console.log(response.data);
       })
       .catch(error => {
@@ -550,7 +550,7 @@ export default {
             recordId
           }
       }`;
-      axios.post(apiUrl, { query }).then(response => {
+      axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
         console.log(response.data);
       })
       .catch(error => {

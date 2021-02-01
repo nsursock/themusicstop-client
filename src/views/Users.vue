@@ -392,7 +392,7 @@ export default {
           }
         }`;
         try {
-          let response = await axios.post(apiUrl, { query });
+          let response = await axios.post(process.env.VUE_APP_API || apiUrl, { query });
           //this.tableLoaded = true;
           this.table = {
             rows: response.data.data.userMany,
@@ -406,7 +406,7 @@ export default {
       },
       async incrementLike() {
         let query = `query { userById(_id: "${this.member.id}") { numLike } }`;
-        axios.post(apiUrl, { query }).then(async response => {
+        axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(async response => {
           let n = response.data.data.userById.numLike;
 
           query = `mutation {
@@ -418,7 +418,7 @@ export default {
             }
           }`;
           try {
-            await axios.post(apiUrl, { query });
+            await axios.post(process.env.VUE_APP_API || apiUrl, { query });
           } catch(error) {
             console.log(error);
           }
@@ -429,7 +429,7 @@ export default {
       },
       async incrementLove() {
         let query = `query { userById(_id: "${this.member.id}") { numLove } }`;
-        axios.post(apiUrl, { query }).then(async response => {
+        axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(async response => {
           let n = response.data.data.userById.numLove;
 
           query = `mutation {
@@ -441,7 +441,7 @@ export default {
             }
           }`;
           try {
-            await axios.post(apiUrl, { query });
+            await axios.post(process.env.VUE_APP_API || apiUrl, { query });
           } catch(error) {
             console.log(error);
           }
@@ -452,7 +452,7 @@ export default {
       },
       async incrementHaha() {
         let query = `query { userById(_id: "${this.member.id}") { numHaha } }`;
-        axios.post(apiUrl, { query }).then(async response => {
+        axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(async response => {
           let n = response.data.data.userById.numHaha;
 
           query = `mutation {
@@ -464,7 +464,7 @@ export default {
             }
           }`;
           try {
-            await axios.post(apiUrl, { query });
+            await axios.post(process.env.VUE_APP_API || apiUrl, { query });
           } catch(error) {
             console.log(error);
           }
@@ -475,7 +475,7 @@ export default {
       },
       async incrementSad() {
         let query = `query { userById(_id: "${this.member.id}") { numSad } }`;
-        axios.post(apiUrl, { query }).then(async response => {
+        axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(async response => {
           let n = response.data.data.userById.numSad;
 
           query = `mutation {
@@ -487,7 +487,7 @@ export default {
             }
           }`;
           try {
-            await axios.post(apiUrl, { query });
+            await axios.post(process.env.VUE_APP_API || apiUrl, { query });
           } catch(error) {
             console.log(error);
           }
