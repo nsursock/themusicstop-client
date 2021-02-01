@@ -89,8 +89,8 @@
         <div class="hidden sm:block sm:ml-6">
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <router-link v-bind:class="$route.name === 'Home' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" px-3 py-2 rounded-md text-sm font-medium" v-bind:to="{ name: 'Home' }">Home</router-link>
-            <router-link v-bind:class="$route.name === 'Messages' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" px-3 py-2 rounded-md text-sm font-medium" v-bind:to="{ name: 'Messages' }">Messages</router-link>
+            <router-link v-show="!$store.state.isProd" v-bind:class="$route.name === 'Home' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" px-3 py-2 rounded-md text-sm font-medium" v-bind:to="{ name: 'Home' }">Home</router-link>
+            <router-link v-show="!$store.state.isProd" v-bind:class="$route.name === 'Messages' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" px-3 py-2 rounded-md text-sm font-medium" v-bind:to="{ name: 'Messages' }">Messages</router-link>
             <!-- <router-link v-bind:class="$route.name === 'About' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" px-3 py-2 rounded-md text-sm font-medium" to="/about">About</router-link> -->
             <router-link v-bind:class="$route.name === 'Users' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" px-3 py-2 rounded-md text-sm font-medium" to="/users">Members</router-link>
           </div>
@@ -344,7 +344,7 @@
       <div v-show="showPassword" class="  bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full space-y-8">
           <div>
-            <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow">
+            <!-- <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow"> -->
             <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
               Change password
             </h2>
@@ -586,7 +586,7 @@ export default {
 
       this.$store.dispatch('destroyToken')
         .then( () => {
-          this.$router.push({ name: 'Home' })
+          this.$router.push('/');
         })
         .catch(err => console.log(err));
 

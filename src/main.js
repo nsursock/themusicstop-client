@@ -29,4 +29,4 @@ new Vue({
   components: { App }
 }).$mount('#app')
 
-console.log(process.env);
+//console.log(process.env);

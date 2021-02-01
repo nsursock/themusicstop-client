@@ -9,6 +9,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     token: localStorage.getItem('access_token') || null,
+    isProd: process.env.VUE_APP_API !== undefined,
   },
   getters : {
     loggedIn(state) {
