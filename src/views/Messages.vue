@@ -1,10 +1,10 @@
 <template lang="html">
   <div class="">
     <div class="flex-1 flex overflow-hidden">
-      <div class="w-64 bg-gray-100 p-6 overflow-y-auto">
-        <nav class="h-screen ">
+      <div class="w-64 bg-gray-100 p-6 overflow-y-auto h-screen">
+        <nav class="">
           <h2 class="text-xs font-semibold text-gray-600 uppercase tracking-wide">Mailboxes</h2>
-          <div class="mt-3 space-y-3">
+          <div class="mt-3 space-y-1">
             <a class="-mx-3 px-3 py-1 text-sm font-medium flex justify-between items-center bg-gray-200 rounded-lg" href="#">
               <span class="inline-flex items-center">
                 <svg class="text-gray-500 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -43,7 +43,7 @@
             </a>
           </div>
           <h2 class="text-xs font-semibold text-gray-600 uppercase tracking-wide mt-8">Folders</h2>
-          <div class="mt-3">
+          <div class="mt-3 space-y-1">
             <a v-for="i in 30" :key="i.key" class="-mx-3 px-3 py-1 text-sm font-medium flex justify-between items-center hover:bg-gray-200 rounded-lg" href="#">
               <span class="inline-flex items-center">
                 <svg class="text-gray-500 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -112,7 +112,7 @@
               </div>
             </div>
             <div class="bg-white px-5 py-4 flex items-center justify-between">
-              <h3 class="text-xl text-gray-900 truncate">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation?</h3>
+              <h3 class="text-xl text-gray-900">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation?</h3>
               <div class="ml-4 flex-shrink-0">
                 <span class="mr-2">#1428</span>
                 <span class="text-sm font-semibold text-purple-900 bg-purple-200 rounded-full leading-none px-2 py-1">Active</span>
@@ -120,7 +120,7 @@
             </div>
           </div>
           <div class="p-3 flex-1 overflow-y-auto">
-            <article v-for="i in 5" :key="i.key" class="mt-3 px-10 pt-6 pb-8 mt-2 bg-white rounded-lg shadow">
+            <article v-for="i in 15" :key="i.key" class="mt-3 px-10 pt-6 pb-8 mt-2 bg-white rounded-lg shadow">
               <div class="flex items-center justify-between">
                 <p class="text-lg font-semibold">
                   <span class="text-gray-900">Joe Armstrong </span>
@@ -147,6 +147,42 @@ export default {
   data() {
     return {
       threads: [
+        {
+          from: 'Gloria Robertson',
+          date: '2 days ago',
+          subject: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
+          message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        },
+        {
+          from: 'Gloria Robertson',
+          date: '2 days ago',
+          subject: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
+          message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        },
+        {
+          from: 'Gloria Robertson',
+          date: '2 days ago',
+          subject: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
+          message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        },
+        {
+          from: 'Gloria Robertson',
+          date: '2 days ago',
+          subject: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
+          message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        },
+        {
+          from: 'Gloria Robertson',
+          date: '2 days ago',
+          subject: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
+          message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        },
+        {
+          from: 'Gloria Robertson',
+          date: '2 days ago',
+          subject: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
+          message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        },
         {
           from: 'Gloria Robertson',
           date: '2 days ago',

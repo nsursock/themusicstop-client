@@ -1,10 +1,9 @@
 <template lang="html">
-  <section class="flex flex-wrap-reverse justify-center md:mb-4 antialiased">
-
+  <div class="flex flex-wrap-reverse justify-center md:mb-4 antialiased">
     <button v-for="(elem, index) in table.rows" :key="index" @click="$parent.viewProfile(elem._id)"
     class="mx-5 my-4 border border-gray-500 rounded-xl">
       <div v-lazy class="relative h-64 w-64 rounded-xl shadow-xl overflow-hidden hidden md:block">
-        <img v-if="elem.coverImage" :data-src="elem.coverImage" class="h-full w-full object-cover" />
+        <img v-if="elem.coverImage && elem.coverImage !== 'null'" :data-src="elem.coverImage" class="h-full w-full object-cover" />
         <img v-else data-src="http://source.unsplash.com/640x480/?landscape" class="h-full w-full object-cover" />
         <div class="absolute inset-0 flex items-center justify-center">
           <div v-lazy class="w-1/2 h-1/2 border-4 border-white rounded-full overflow-hidden">
@@ -31,7 +30,7 @@
           </div>
           <div class="p-8 mt-16 sm:ml-16 sm:mt-0">
             <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
-              {{ elem.birthday | getAge }} • {{ elem.gender }} • {{ elem.city}} • {{ elem.country }}
+              {{ elem.birthday | getAge }} • {{ elem.gender }} • {{ elem.city}}, {{ elem.country }}
             </div>
             <a href="#" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
               {{ elem.firstName }} {{ elem.lastName }}
@@ -44,8 +43,7 @@
         </div>
       </div>
     </button>
-
-  </section>
+  </div>
 </template>
 
 <script>

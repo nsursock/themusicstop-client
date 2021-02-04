@@ -1,6 +1,6 @@
 <template>
-  <div class="px-3 pt-5 pb-5 text-gray-300 bg-gray-800 space-y-5 font-semibold ">
-    <div class="text-base  flex flex-col sm:flex-row items-center justify-center space-x-4">
+  <div class="px-3 py-10 bg-gray-800 space-y-5 text-lg font-light">
+    <div class="flex flex-col sm:flex-row items-center justify-center space-x-4 text-gray-200">
       <div class="space-x-4">
         <router-link to="/" class=" hover:text-gray-500">Home</router-link>
         <router-link to="/about" class=" hover:text-gray-500">About</router-link>
@@ -11,7 +11,7 @@
         <router-link to="/jobs" class=" hover:text-gray-500">Jobs</router-link>
       </div>
     </div>
-    <div class="flex justify-center space-x-3">
+    <div class="flex justify-center space-x-3 text-gray-500">
       <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
         <path fill="none" d="M0 0h24v24H0z"/><path d="M13 19.938A8.001 8.001 0 0 0 12 4a8 8 0 0 0-1 15.938V14H9v-2h2v-1.654c0-1.337.14-1.822.4-2.311A2.726 2.726 0 0 1 12.536 6.9c.382-.205.857-.328 1.687-.381.329-.021.755.005 1.278.08v1.9H15c-.917 0-1.296.043-1.522.164a.727.727 0 0 0-.314.314c-.12.226-.164.45-.164 1.368V12h2.5l-.5 2h-2v5.938zM12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
       </svg>
@@ -28,8 +28,8 @@
         <path fill="none" d="M0 0h24v24H0z"/><path d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1 2v14h14V5H5zm2.5 4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm-1 1h2v7.5h-2V10zm5.5.43c.584-.565 1.266-.93 2-.93 2.071 0 3.5 1.679 3.5 3.75v4.25h-2v-4.25a1.75 1.75 0 0 0-3.5 0v4.25h-2V10h2v.43z"/>
       </svg>-->
     </div>
-    <div class="text-center mt-3 text-lg leading-6 font-medium ">
-      <span>© 2021 Sursock Labs, Inc. All rights reserved.</span>
+    <div class="text-center mt-3 text-gray-500">
+      <span>© {{new Date().getFullYear()}} Sursock Labs, Inc. All rights reserved.</span>
     </div>
   </div>
 </template>

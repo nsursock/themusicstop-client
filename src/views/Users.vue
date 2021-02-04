@@ -161,7 +161,7 @@
           <div v-if="table.rows" class="mt-6 relative flex-1 divide-y divide-gray-500">
 
             <div class="">
-              <img v-if="!member.coverImage" class="h-32 object-cover w-screen" src="https://source.unsplash.com/1920x1280" alt="Random picture from Unsplash">
+              <img v-if="!member.coverImage || member.coverImage === 'null'" class="h-32 object-cover w-screen" src="https://source.unsplash.com/1920x1280" alt="Random picture from Unsplash">
               <img v-else class="h-32 object-cover w-screen" :src="member.coverImage" :alt="`Cover photo of ${member.fullname}`">
               <div class="ml-5 z-10 relative">
                 <svg v-if="!member.profileImage" class=" w-24 h-24 sm:w-40 sm:h-40 sm:ml-5 -mt-10 sm:-mt-24 rounded-lg shadow-md border-white border-4 text-gray-300 bg-gray-600" fill="currentColor" viewBox="0 0 24 24">
