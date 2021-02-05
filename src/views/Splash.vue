@@ -151,7 +151,7 @@ export default {
   name: 'Home',
   methods: {
     handleStart: function() {
-      bus.$emit('start', 'get started pressed')
+      bus.$emit('start');
     }
   }
 }

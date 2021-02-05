@@ -372,7 +372,7 @@ export default {
       // #todo watch out for limit, paginate?
       const query = `
         query {
-          userMany(limit: 1000) {
+          userMany(sort: _ID_DESC) {
             _id
             website
             about

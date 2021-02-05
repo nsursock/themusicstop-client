@@ -30,7 +30,7 @@
         </button>
       </div>
       <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-        <div class="flex-shrink-0 flex items-center">
+        <router-link to="/" class="flex-shrink-0 flex items-center">
           <svg class="h-8 w-8 fill-current text-indigo-500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" ><g>
           <g xmlns="http://www.w3.org/2000/svg">
             <g>
@@ -85,11 +85,11 @@
           </g>
           </svg>
           <span class="hidden sm:block ml-3 text-gray-300 text-lg font-semibold tracking-wide leading-relaxed">The Music Stop</span>
-        </div>
+        </router-link>
         <div class="hidden sm:block sm:ml-6">
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <router-link v-show="!$store.state.isProd" v-bind:class="$route.name === 'Home' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" px-3 py-2 rounded-md text-sm font-medium" v-bind:to="{ name: 'Home' }">Home</router-link>
+            <router-link v-bind:class="$route.name === 'Home' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" px-3 py-2 rounded-md text-sm font-medium" v-bind:to="{ name: 'Home' }">Home</router-link>
             <router-link v-show="!$store.state.isProd" v-bind:class="$route.name === 'Messages' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" px-3 py-2 rounded-md text-sm font-medium" v-bind:to="{ name: 'Messages' }">Messages</router-link>
             <!-- <router-link v-bind:class="$route.name === 'About' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" px-3 py-2 rounded-md text-sm font-medium" to="/about">About</router-link> -->
             <router-link v-bind:class="$route.name === 'Users' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" px-3 py-2 rounded-md text-sm font-medium" to="/users">Members</router-link>
@@ -507,6 +507,10 @@ export default {
     bus.$on('start', () => {
       this.toggleModal();
       this.showSignup = true;
+    });
+    bus.$on('closeAccount', () => {
+      this.toggleModal();
+      this.showClose = true;
     });
     bus.$on('closeMenu', () => {
       this.showMemberMenu = false;
