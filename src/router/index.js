@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Splash from '@/views/Splash'
 import Contact from '@/views/Contact'
+import Donation from '@/views/Donation'
 // import About from '@/views/About'
 // import Users from '@/views/Users'
 // import Settings from '@/views/Settings'
@@ -16,6 +17,7 @@ Vue.use(Router)
 const routes = [
   { path: '/', name: 'Splash', component: Splash },
   { path: '/contact', name: 'Contact', component: Contact },
+  { path: '/donate', name: 'Donate', component: Donation },
   // { path: '/about', name: 'About', component: About },
   { path: '/home', name: 'Home', component: Home, meta: { requiresAuth: true } },
   { path: '/messages', name: 'Messages', component: Messages, meta: { requiresAuth: true } },
