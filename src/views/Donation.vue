@@ -296,7 +296,12 @@ export default {
         token:transactionToken
       };
       var route=self.api+"/charge"
-      axios.post(route, dt).then(response => {
+      axios.post(route, dt, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+        }
+      }).then(response => {
         if(response.status===200){
           if (response.data.error === false) {
             console.log("Transaction succeeded");
