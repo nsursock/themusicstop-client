@@ -220,13 +220,14 @@
                 <input required v-model="custLastname" type="text" name="last_name" id="last_name" autocomplete="family-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
               </div>
 
-                  <label for="card_details" class="block text-sm font-medium text-gray-700 mt-2">Card details</label>
-                  <div ref="card" id="card_details" class="mt-1 form-control border border-gray-300 px-3 py-2 w-full rounded-md shadow-md">
+                  <label for="card-element" class="block text-sm font-medium text-gray-700 mt-2">Card details</label>
+                  <div ref="card" id="card-element" class="mt-1 form-control border border-gray-300 px-3 py-2 w-full rounded-md shadow-md">
                     <!-- A Stripe Element will be inserted here. -->
                   </div>
+                  <!-- Used to display Element errors. -->
+                  <div id="card-errors" role="alert" class="text-red-600 text-xs mt-2">{{ msg }}</div>
 
-
-                  <input :disabled="lockSubmit" class="mt-9 inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" type="submit" :value="`Donate ${payCurrency} ${payAmount}`" v-on:click.prevent="purchase" />
+                  <button :disabled="lockSubmit" class="mt-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" type="submit" v-on:click.prevent="purchase">Donate {{payCurrency}} {{payAmount}}</button>
                 </form>
             </div>
           </div>
@@ -252,7 +253,7 @@ export default {
       spk: process.env.STRIPE_KEY || "pk_test_51IHPrGGrVUCQrQF7GzGUqErBudr5gE6HScm57Et46MkllKNJ9oEkNhghGdPjnlzpOchCOSylaR2paK85hwIVhAbn00Kgmxuzyl",
       stripe:undefined,
       card:undefined,
-//      msg: 'Donate Here',
+      msg: '',
       payAmount:"10.00",
       payCurrency:"USD",
       custFirstname: '',
@@ -269,12 +270,13 @@ export default {
 
       self.stripe.createToken(self.card).then(function(result) {
         if (result.error) {
-          alert(result.error.message)
+          this.msg = result.error.message;
           self.$forceUpdate(); // Forcing the DOM to update so the Stripe Element can update.
           self.lockSubmit=false
           return;
         }
         else{
+          self.msg = 'Processing...';
           self.processTransaction(result.token.id)
         }
       })
@@ -296,24 +298,29 @@ export default {
         token:transactionToken
       };
       var route=self.api+"/charge"
-      axios.post(route, dt, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-        }
-      }).then(response => {
+      axios.post(route, dt
+        // {
+        // headers: {
+        //   'Access-Control-Allow-Origin': '*',
+        //   'Content-Type': 'application/json',
+        // }
+    //  }
+    ).then(response => {
+      console.log(response);
         if(response.status===200){
           if (response.data.error === false) {
             console.log("Transaction succeeded");
+            this.msg = 'Transaction succeeded';
             self.lockSubmit=false;
           } else
             throw new Error(response.data.error.raw.message);
         }
         else{
-          throw new Error("Failed donation")
+          throw new Error("Failed transaction")
         }
       }).catch((err) => {
         console.log("error: "+err.message)
+        this.msg = err.message;
         self.lockSubmit=false
       });
     },

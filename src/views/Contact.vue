@@ -18,8 +18,8 @@
           <div class="mt-5 md:mt-0 md:col-span-6">
             <form action="https://formspree.io/f/meqpvyvl" method="POST">
               <div class=" sm:overflow-hidden">
-                <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-                  <div class="grid grid-cols-6 gap-6">
+                <div class="px-2 py-3 bg-white sm:p-3">
+                  <div class="grid grid-cols-6 gap-3">
 
                     <div class="col-span-6 sm:col-span-3">
                       <label for="first_name" class="block text-sm font-medium text-gray-700">First name</label>
