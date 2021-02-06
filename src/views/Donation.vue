@@ -259,7 +259,7 @@ export default {
       custLastname: '',
       custEmail: '',
       lockSubmit:false,
-      api: apiUrl
+      api: process.env.VUE_APP_API || apiUrl
     }
   },
   methods:{
