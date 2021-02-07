@@ -1,15 +1,15 @@
 <template>
   <div class="px-3 py-10 bg-gray-800 space-y-5 text-lg font-semibold ">
-    <div class="flex flex-col md:flex-row items-center justify-center space-x-4 text-gray-200">
+    <div class="flex flex-col sm:flex-row items-center justify-center sm:space-x-4 text-gray-200 text-center">
       <div class="space-x-4">
         <router-link to="/" class=" hover:text-gray-500">Home</router-link>
-        <router-link to="/about" class=" hover:text-gray-500">About</router-link>
+        <!-- <router-link to="/about" class=" hover:text-gray-500">About</router-link> -->
         <router-link to="/contact" class=" hover:text-gray-500">Contact</router-link>
       </div>
       <div class="space-x-4">
         <router-link to="/donate" class=" hover:text-gray-500">Donate</router-link>
         <a href='/blog' class=" hover:text-gray-500">Blog</a>
-        <router-link to="/jobs" class=" hover:text-gray-500">Jobs</router-link>
+        <!-- <router-link to="/jobs" class=" hover:text-gray-500">Jobs</router-link> -->
       </div>
     </div>
     <div class="flex justify-center space-x-3 text-gray-500">

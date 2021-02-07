@@ -1,12 +1,36 @@
 <template>
   <section class="text-gray-600 body-font relative">
     <div class="absolute inset-0 bg-gray-300">
-      <iframe width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0" title="map" scrolling="no" src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=Beirut+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed" style="filter: grayscale(1) contrast(1.2) opacity(0.4);"></iframe>
+      <iframe width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0" title="map" scrolling="no" src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=San+Francisco+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed" style="filter: grayscale(1) contrast(1.2) opacity(0.4);"></iframe>
       <!-- <img class="object-cover h-screen w-screen" src="http://source.unsplash.com/1920x1280/?music" alt=""> -->
     </div>
     <div class="container px-5 py-24 mx-auto flex">
-      <div class="lg:w-1/3 md:w-1/2 bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 shadow-md">
-        <div>
+      <div class="lg:w-1/3 md:w-1/2 sm:w-3/5 w-full bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 shadow-md">
+
+        <div class="flex flex-col items-center " :class="receiptUrl !== '' ? 'block' : 'hidden'">
+          <div class="mb-3 mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+            <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+              <path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/>
+            </svg>
+          </div>
+          <div class="mt-3 text-center sm:mt-0  sm:text-left flex flex-col items-center">
+            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+              Payment successful
+            </h3>
+            <div class="mt-2">
+              <p class="text-sm text-gray-500 text-center">
+                Of course, it matters how much you donated. But what's important is you think this website is useful. So thank you!
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center justify-start space-x-2 mt-2 px-5">
+            <a :href="receiptUrl" class="w-48  lg:mt-3  inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <span class="mx-auto">Receipt</span>
+            </a>
+          </div>
+        </div>
+
+        <div :class="receiptUrl !== '' ? 'hidden' : 'block'">
           <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-6">
               <div class="px-4 sm:px-0">
@@ -260,7 +284,8 @@ export default {
       custLastname: '',
       custEmail: '',
       lockSubmit:false,
-      api: process.env.VUE_APP_API || apiUrl
+      api: process.env.VUE_APP_API || apiUrl,
+      receiptUrl: ''
     }
   },
   methods:{
@@ -271,7 +296,7 @@ export default {
       self.stripe.createToken(self.card).then(function(result) {
         if (result.error) {
           this.msg = result.error.message;
-          self.$forceUpdate(); 
+          self.$forceUpdate();
           self.lockSubmit=false
           return;
         }
@@ -302,6 +327,7 @@ export default {
 
       if (response.data.data.donate !== null) {
         this.msg = 'Transaction succeeded';
+        this.receiptUrl = response.data.data.donate;
       } else {
         this.msg = response.data.errors[0].message;
       }
