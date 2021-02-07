@@ -277,6 +277,7 @@ export default {
         }
         else{
           self.msg = 'Processing...';
+          console.log(result.token.id);
           self.processTransaction(result.token.id)
         }
       })
@@ -285,7 +286,29 @@ export default {
         self.lockSubmit=false
       });
     },
-    processTransaction(transactionToken){
+    async processTransaction(transactionToken) {
+      var self = this;
+      const query = `
+        query {
+          donate(
+            firstname: "${self.custFirstname}",
+            lastname: "${self.custLastname}",
+            email: "${self.custEmail}",
+            token: "${transactionToken}",
+            amount: ${self.payAmount * 100},
+            currency: "${self.payCurrency}")
+        }`;
+      let response = await axios.post(process.env.VUE_APP_API || apiUrl, { query });
+      console.log(response);
+
+      if (response.data.data.donate !== null) {
+        this.msg = 'Transaction succeeded';
+      } else {
+        this.msg = response.data.errors[0].message;
+      }
+      self.lockSubmit = false;
+    },
+    processTransaction2(transactionToken){
       var self=this;
       var dt= {
         firstname: self.custFirstname,
@@ -306,7 +329,6 @@ export default {
         // }
     //  }
     ).then(response => {
-      console.log(response);
         if(response.status===200){
           if (response.data.error === false) {
             console.log("Transaction succeeded");
