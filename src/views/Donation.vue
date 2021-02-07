@@ -249,6 +249,7 @@ export default {
     self.card.mount(self.$refs.card);
 
     console.log('stripe key: ' + self.spk);
+    console.log(process.env);
   },
   data () {
     return {
