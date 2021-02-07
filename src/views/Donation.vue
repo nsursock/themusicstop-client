@@ -247,6 +247,8 @@ export default {
     self.stripe= window.Stripe(self.spk);
     self.card = self.stripe.elements().create('card');
     self.card.mount(self.$refs.card);
+
+    console.log('stripe key: ' + self.spk);
   },
   data () {
     return {
