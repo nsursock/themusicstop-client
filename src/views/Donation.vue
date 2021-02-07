@@ -244,11 +244,12 @@ import axios from 'axios'
 export default {
   mounted: function () {
     var self=this;
+    self.spk = 'pk_live_51IHPrGGrVUCQrQF7MuGnM60cLNEhONcMKnmhYIe6AR3n64jb3chj1jRzfvdP6M9s7pEkLd6DRywOdq8oDQZuqBZZ00e0hp3MK2';
     self.stripe= window.Stripe(self.spk);
     self.card = self.stripe.elements().create('card');
     self.card.mount(self.$refs.card);
 
-    console.log('stripe key: ' + self.spk);
+    //console.log('stripe key: ' + self.spk);
     console.log(process.env);
   },
   data () {
