@@ -227,7 +227,7 @@
                   <!-- Used to display Element errors. -->
                   <div id="card-errors" role="alert" class="text-red-600 text-xs mt-2">{{ msg }}</div>
 
-                  <button :disabled="lockSubmit" class="mt-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" type="submit" v-on:click.prevent="purchase">Donate {{payCurrency}} {{payAmount}}</button>
+                  <button :disabled="lockSubmit" class="mt-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" type="submit" v-on:click.prevent="purchase">Pay {{payCurrency}} {{parseFloat(payAmount).toFixed(2)}}</button>
                 </form>
             </div>
           </div>
@@ -244,17 +244,15 @@ import axios from 'axios'
 export default {
   mounted: function () {
     var self=this;
-    self.spk = 'pk_live_51IHPrGGrVUCQrQF7MuGnM60cLNEhONcMKnmhYIe6AR3n64jb3chj1jRzfvdP6M9s7pEkLd6DRywOdq8oDQZuqBZZ00e0hp3MK2';
     self.stripe= window.Stripe(self.spk);
     self.card = self.stripe.elements().create('card');
     self.card.mount(self.$refs.card);
 
-    //console.log('stripe key: ' + self.spk);
     console.log(process.env);
   },
   data () {
     return {
-      spk: process.env.STRIPE_KEY || "pk_test_51IHPrGGrVUCQrQF7GzGUqErBudr5gE6HScm57Et46MkllKNJ9oEkNhghGdPjnlzpOchCOSylaR2paK85hwIVhAbn00Kgmxuzyl",
+      spk: process.env.VUE_APP_STRIPE_KEY || "pk_test_51IHPrGGrVUCQrQF7GzGUqErBudr5gE6HScm57Et46MkllKNJ9oEkNhghGdPjnlzpOchCOSylaR2paK85hwIVhAbn00Kgmxuzyl",
       stripe:undefined,
       card:undefined,
       msg: '',
