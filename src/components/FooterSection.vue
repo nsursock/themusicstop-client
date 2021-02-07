@@ -1,6 +1,6 @@
 <template>
   <div class="px-3 py-10 bg-gray-800 space-y-5 text-lg font-semibold ">
-    <div class="flex flex-col sm:flex-row items-center justify-center space-x-4 text-gray-200">
+    <div class="flex flex-col md:flex-row items-center justify-center space-x-4 text-gray-200">
       <div class="space-x-4">
         <router-link to="/" class=" hover:text-gray-500">Home</router-link>
         <router-link to="/about" class=" hover:text-gray-500">About</router-link>

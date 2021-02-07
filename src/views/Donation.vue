@@ -247,8 +247,6 @@ export default {
     self.stripe= window.Stripe(self.spk);
     self.card = self.stripe.elements().create('card');
     self.card.mount(self.$refs.card);
-
-    console.log(process.env);
   },
   data () {
     return {
@@ -273,13 +271,12 @@ export default {
       self.stripe.createToken(self.card).then(function(result) {
         if (result.error) {
           this.msg = result.error.message;
-          self.$forceUpdate(); // Forcing the DOM to update so the Stripe Element can update.
+          self.$forceUpdate(); 
           self.lockSubmit=false
           return;
         }
         else{
           self.msg = 'Processing...';
-          console.log(result.token.id);
           self.processTransaction(result.token.id)
         }
       })
@@ -309,47 +306,6 @@ export default {
         this.msg = response.data.errors[0].message;
       }
       self.lockSubmit = false;
-    },
-    processTransaction2(transactionToken){
-      var self=this;
-      var dt= {
-        firstname: self.custFirstname,
-        lastname: self.custLastname,
-        email: self.custEmail,
-        amount: self.payAmount * 100,
-        // amount: self.stripCurrency(self.payAmount), //stripe uses an int [with shifted decimal place] so we must convert our payment amount
-        currency: self.payCurrency,
-        description: "Donation",
-        token:transactionToken
-      };
-      var route=self.api+"/charge"
-      axios.post(route, dt
-        // {
-        // headers: {
-        //   'Access-Control-Allow-Origin': '*',
-        //   'Content-Type': 'application/json',
-        // }
-    //  }
-    ).then(response => {
-        if(response.status===200){
-          if (response.data.error === false) {
-            console.log("Transaction succeeded");
-            this.msg = 'Transaction succeeded';
-            self.lockSubmit=false;
-          } else
-            throw new Error(response.data.error.raw.message);
-        }
-        else{
-          throw new Error("Failed transaction")
-        }
-      }).catch((err) => {
-        console.log("error: "+err.message)
-        this.msg = err.message;
-        self.lockSubmit=false
-      });
-    },
-    stripCurrency(val){
-      return val.replace(',','').replace('$','').replace('.','')
     }
   }
 }
