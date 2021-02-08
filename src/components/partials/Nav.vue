@@ -174,7 +174,7 @@
   </div>
 </nav>
 
-<!-- login and signup modal -->
+
 <div v-show="showModal" class="fixed z-20 inset-0 overflow-y-auto">
   <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
     <!--
@@ -263,7 +263,34 @@
       </div>
 
       <div v-show="showSignup" class="  bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-md w-full space-y-8">
+
+        <div v-show="isLoggedIn" class="flex flex-col items-center ">
+          <div class="mb-3 mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+            <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+              <path fill="none" d="M0 0h24v24H0z"/><path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"/>
+            </svg>
+          </div>
+          <div class="mt-3 text-center sm:mt-0  sm:text-left flex flex-col items-center">
+            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+              Signup successful
+            </h3>
+            <div class="mt-2">
+              <p class="text-sm text-gray-500 text-center">
+                Enter a world of music where you will find people are the most important asset. And remember, there's a contact page should you have questions.
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center justify-start space-x-2 mt-2 px-5">
+            <router-link to="/users" class="w-48  lg:mt-3  inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <span class="mx-auto">Members</span>
+            </router-link>
+            <router-link to="/settings" class="w-48  lg:mt-3  inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <span class="mx-auto">Settings</span>
+            </router-link>
+          </div>
+        </div>
+
+        <div v-show="!isLoggedIn" class="max-w-md w-full space-y-8">
           <div>
             <!-- <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow"> -->
             <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -583,10 +610,12 @@ export default {
         gender: this.user.gender,
         city: this.user.city,
         country: this.user.country
-      }).then( () => {
-        this.showModal = false;
-        this.$router.push({ name: 'Settings' })
-      }).catch(err => console.log(err));
+      })
+      // .then( () => {
+      //   this.showModal = false;
+      //   this.$router.push({ name: 'Settings' })
+      // })
+      .catch(err => console.log(err));
     },
 
     async deleteAccount() {
