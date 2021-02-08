@@ -280,11 +280,11 @@
               </p>
             </div>
           </div>
-          <div class="flex items-center justify-start space-x-2 mt-2 px-5">
-            <router-link to="/users" class="w-48  lg:mt-3  inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <div class="flex flex-col md:flex-row items-center justify-start mt-2 px-5">
+            <router-link to="/users" @click.native="toggleModal" class="w-48 lg:mt-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               <span class="mx-auto">Members</span>
             </router-link>
-            <router-link to="/settings" class="w-48  lg:mt-3  inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <router-link to="/settings" @click.native="toggleModal" class="mt-2 md:mt-0 md:ml-2 w-48 lg:mt-3  inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               <span class="mx-auto">Settings</span>
             </router-link>
           </div>
@@ -345,6 +345,11 @@
               </div>
 
               <div v-show="currentStep !== lastStep" class="flex items-center justify-center space-x-3">
+                <button @click="toggleModal" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                  </span>
+                  Cancel
+                </button>
                 <button v-on:click="currentStep++" type="button" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-purple-700 bg-purple-100 hover:bg-purple-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
                   Next
                 </button>
@@ -611,10 +616,6 @@ export default {
         city: this.user.city,
         country: this.user.country
       })
-      // .then( () => {
-      //   this.showModal = false;
-      //   this.$router.push({ name: 'Settings' })
-      // })
       .catch(err => console.log(err));
     },
 
