@@ -366,9 +366,6 @@ export default {
   },
 
   methods: {
-    showComments: function() {
-
-    },
     async incrementLike(id) {
       let query = `query { messageById(_id: "${id}") { numLike } }`;
       axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(async response => {

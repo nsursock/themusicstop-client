@@ -172,9 +172,9 @@
               </div>
               <div class="mt-5 flex  lg:ml-4 w-screen mx-5">
                 <span class="sm:ml-3 sm:w-40 w-24">
-                  <a :href="getMailto" class="w-full inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  <button v-on:click="sendMessage" class="w-full inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     <span class="mx-auto">Message</span>
-                  </a>
+                  </button>
                 </span>
                 <span class="sm:block ml-3 sm:w-40 w-24">
                   <a :href="getFacetime" class="w-full inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -320,6 +320,10 @@ export default {
     this.getTableFromApi();
   },
   methods: {
+    sendMessage: function() {
+      // this.$router.push('/messages?email='+this.member.email);
+      this.$router.push({ path: 'messages', query: { email: this.member.email }});
+    },
     viewProfile: function(id) {
       this.showProfileSlide = !this.showProfileSlide;
 

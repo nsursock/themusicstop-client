@@ -7,9 +7,9 @@ import Donation from '@/views/Donation'
 // import Users from '@/views/Users'
 // import Settings from '@/views/Settings'
 
-const Users = () => import(/* webpackChunkName: "social1" */ '@/views/Users')
-const Home = () => import(/* webpackChunkName: "social2" */ '@/views/Home')
-const Messages = () => import(/* webpackChunkName: "social3" */ '@/views/Messages')
+const Users = () => import(/* webpackChunkName: "social" */ '@/views/Users')
+const Home = () => import(/* webpackChunkName: "social" */ '@/views/Home')
+const Messages = () => import(/* webpackChunkName: "social" */ '@/views/Messages')
 const Settings = () => import(/* webpackChunkName: "config" */ '@/views/Settings')
 
 Vue.use(Router)

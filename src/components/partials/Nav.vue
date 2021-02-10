@@ -591,9 +591,9 @@ export default {
     },
 
     handleLogout: function() {
-      this.$store.dispatch('destroyToken')
+      this.$router.push('/')
         .then( () => {
-          this.$router.push('/')
+          this.$store.dispatch('destroyToken');
         }).catch(err => console.log(err));
     },
     handleLogin: function() {
@@ -602,7 +602,7 @@ export default {
         password: this.user.password
       }).then( () => {
         this.showModal = false;
-        this.$router.push({ name: 'Settings' })
+        this.$router.push({ name: 'Home' })
       }).catch(err => console.log(err));
     },
     handleSignup: function() {
@@ -621,10 +621,9 @@ export default {
 
     async deleteAccount() {
       let id = this.$store.getters.loggedInUserId;
-
-      this.$store.dispatch('destroyToken')
+      this.$router.push('/')
         .then( () => {
-          this.$router.push('/');
+          this.$store.dispatch('destroyToken');
         })
         .catch(err => console.log(err));
 

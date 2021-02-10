@@ -93,55 +93,6 @@ export default {
   },
   props: ['table'],
   name: 'ListCard',
-  async mounted() {
-    // let query = '';
-    // this.table.rows.forEach(async (item, index) => {
-    //   // console.log('treating element #' + index);
-    //   query = `query {
-    //     relationOne(filter: {
-    //       memberId2: "${this.$store.getters.loggedInUserId}" AND: {
-    //         memberId1: "${item._id}"
-    //       }
-    //     }) {
-    //       _id
-    //       memberId1
-    //       memberId2
-    //     	status
-    //   	}
-    //   }`;
-    //   let r1 = await axios.post(process.env.VUE_APP_API || apiUrl, { query });
-    //   r1 = r1.data.data.relationOne;
-    //
-    //   query = `query {
-    //     relationOne(filter: {
-    //       memberId1: "${this.$store.getters.loggedInUserId}" AND: {
-    //         memberId2: "${item._id}"
-    //       }
-    //     }) {
-    //       _id
-    //       memberId1
-    //       memberId2
-    //       status
-    //     }
-    //   }`;
-    //   let r2 = await axios.post(process.env.VUE_APP_API || apiUrl, { query });
-    //   r2 = r2.data.data.relationOne;
-    //
-    //   if (r1 !== null) {
-    //     this.$set(this.initLoggedIn, index, false);
-    //     this.$set(this.isPending, index, r1.status === 'pending');
-    //     this.$set(this.isConfirmed, index, r1.status === 'friend');
-    //   } else if (r2 !== null) {
-    //     this.$set(this.initLoggedIn, index, true);
-    //     this.$set(this.isPending, index, r2.status === 'pending');
-    //     this.$set(this.isConfirmed, index, r2.status === 'friend');
-    //   } else {
-    //     this.$set(this.initLoggedIn, index, false);
-    //     this.$set(this.isPending, index, false);
-    //     this.$set(this.isConfirmed, index, false);
-    //   }
-    // });
-  },
   data() {
     return {
       isConfirmed: [],
