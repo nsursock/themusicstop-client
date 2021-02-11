@@ -98,14 +98,14 @@
 
     <div class="md:flex-1 md:flex md:overflow-hidden">
 
-      <div v-show="divSelected === 'nav' && isMobile || !isMobile" class="w-64 bg-gray-100 p-6 overflow-y-auto h-screen w-screen md:w-64">
+      <div v-show="divSelected === 'nav' && isMobile || !isMobile" class="w-full md:w-1/4 bg-gray-100 p-6 overflow-y-auto h-screen w-screen ">
         <nav class="">
           <h2 class="text-xs font-semibold text-gray-600 uppercase tracking-wide">Mailboxes</h2>
-          <div class="mt-3 space-y-1">
+          <div class="mt-3 space-y-3">
             <button v-for="(mailbox, index) in mailboxes" :key="index" ref="mbox"
             :class="currMbox === mailbox ? 'outline-none bg-gray-200 border-transparent' : ''"
-            class="w-full md:w-56 -mx-3 px-3 py-1 text-sm font-medium flex justify-between items-center hover:bg-gray-200 rounded-lg "
-            @focus="currMbox = mailbox" @click="divSelected = 'conv'">
+            class="w-full  -mx-3 px-3 py-1 text-sm font-medium flex justify-between items-center hover:bg-gray-200 rounded-lg "
+            @click="divSelected = 'conv', currMbox = mailbox">
               <span class="inline-flex items-center">
                 <svg v-show="mailbox === 'All'" class="text-gray-500 h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-2.29-2.333A17.9 17.9 0 0 1 8.027 13H4.062a8.008 8.008 0 0 0 5.648 6.667zM10.03 13c.151 2.439.848 4.73 1.97 6.752A15.905 15.905 0 0 0 13.97 13h-3.94zm9.908 0h-3.965a17.9 17.9 0 0 1-1.683 6.667A8.008 8.008 0 0 0 19.938 13zM4.062 11h3.965A17.9 17.9 0 0 1 9.71 4.333 8.008 8.008 0 0 0 4.062 11zm5.969 0h3.938A15.905 15.905 0 0 0 12 4.248 15.905 15.905 0 0 0 10.03 11zm4.259-6.667A17.9 17.9 0 0 1 15.973 11h3.965a8.008 8.008 0 0 0-5.648-6.667z"/></svg>
                 <svg v-show="mailbox === 'Inbox'" class="text-gray-500 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -146,7 +146,7 @@
         </nav>
       </div>
 
-      <div v-show="divSelected === 'conv' && isMobile || !isMobile" class="w-full md:max-w-xs md:flex-grow border-l border-r border-gray-300 flex flex-col overflow-hidden bg-gray-200 w-screen">
+      <div v-show="divSelected === 'conv' && isMobile || !isMobile" class="w-full md:w-1/4 md:max-w-xs md:flex-grow border-l border-r border-gray-300 flex flex-col overflow-hidden bg-gray-200 w-screen h-screen">
         <div class="px-4 py-2 flex justify-between items-center border-b border-gray-300 flex-shrink-0">
           <button class="flex items-center text-xs font-semibold text-gray-500">
             Sorted by Date
@@ -165,7 +165,7 @@
         </div>
         <div class="overflow-y-auto flex-1">
           <button v-for="(message, index) in threadsFiltered" :key="index"
-          @focus="thread = threadsFiltered[index].subject" @click="divSelected = 'msg'"
+          @click="divSelected = 'msg', thread = threadsFiltered[index].subject"
           :class="index !== 0 ? 'border-t' : ''" class="block px-6 py-3 bg-white w-full">
           <div class="flex justify-between">
             <span v-if="person(message.talkerId)" class="text-xs font-semibold text-gray-900">
@@ -184,7 +184,7 @@
       </div>
     </div>
 
-      <main v-show="divSelected === 'msg' && isMobile || !isMobile" class="flex-1 flex bg-gray-200 h-screen">
+      <main v-show="divSelected === 'msg' && isMobile || !isMobile" class="w-full md:w-2/4 flex-1 flex bg-gray-200 h-screen">
         <div class="flex-1 flex flex-col w-0">
           <div class="shadow-md relative">
             <div class="flex items-center justify-between bg-gray-100 py-4 px-6 border-b border-gray-300">
@@ -451,7 +451,10 @@ export default {
   },
   computed: {
     isMobile: function() {
-      return screen.width <= 768;
+      const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+      const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+      const l = 640; // px
+      return vw < l || vh < l;
     },
     threadsFiltered: function() {
       let t = [];

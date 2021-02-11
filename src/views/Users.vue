@@ -321,7 +321,6 @@ export default {
   },
   methods: {
     sendMessage: function() {
-      // this.$router.push('/messages?email='+this.member.email);
       this.$router.push({ path: 'messages', query: { email: this.member.email }});
     },
     viewProfile: function(id) {
