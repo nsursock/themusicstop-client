@@ -616,6 +616,19 @@ export default {
         gender: this.user.gender,
         city: this.user.city,
         country: this.user.country
+      }).then( async () => {
+        let publicKey = await this.$store.dispatch('getWebWorkerResponse', {messageType: 'generate-keys'});
+        let privateKey = await this.$store.dispatch('getWebWorkerResponse', {messageType: 'private-key'});
+        const query = `mutation {
+          userUpdateById(
+            _id: "${this.$store.getters.loggedInUserId}",
+            record: { publicKey: """${publicKey}""",
+                      privateKey: """${privateKey}"""}
+          ) {
+            recordId
+          }
+        }`;
+        await axios.post(process.env.VUE_APP_API || apiUrl, { query });
       })
       .catch(err => console.log(err));
     },

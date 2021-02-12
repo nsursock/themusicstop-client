@@ -177,8 +177,8 @@
           </div>
           <div class="flex flex-col ">
             <p class="mt-1 text-left text-sm text-gray-900 truncate">{{message.subject}}</p>
-            <p class="md:hidden mt-2 text-left text-sm text-gray-600">{{message.text.substr(0,160)}}...</p>
-            <p class="hidden md:block mt-2 text-left text-sm text-gray-600">{{message.text.substr(0,80)}}...</p>
+            <p class="md:hidden mt-2 text-left text-sm text-gray-600">{{message.text.substring(0,160)}}...</p>
+            <p class="hidden md:block mt-2 text-left text-sm text-gray-600">{{message.text.substring(0,80)}}...</p>
           </div>
         </button>
       </div>
@@ -301,6 +301,10 @@ export default {
   },
   data() {
     return {
+      // originPublicKey: null,
+      destinationPublicKey: null,
+      privateKey: null,
+
       divSelected: 'nav',
       sortAsc: true,
       sortAsc2: true,
@@ -376,37 +380,39 @@ export default {
       }
     },
     async handleWrite() {
-      let query, recipientId;
-
-      query = `query { userOne(filter: {
+      let query, encryptedText, recipientId;
+      try {
+        query = `query { userOne(filter: {
           email: "${this.recipient}"
-        }) { _id }
-      }`;
-      try {
+        }) {  recipientId: _id
+              key: publicKey }
+        }`;
         let response = await axios.post(process.env.VUE_APP_API || apiUrl, { query });
-        recipientId = response.data.data.userOne._id;
-      } catch (error) {
-        console.log(error);
-      }
+        recipientId = response.data.data.userOne.recipientId;
+        this.destinationPublicKey = response.data.data.userOne.key;
 
-      query  = 'mutation { messageCreateOne( record: {\n';
-      query += `text: """${this.message}""",\n`;
-      query += `subject: """${this.subject}""",\n`;
-      query += `publishedAt: "${new Date()}",\n`;
-      query += `authorId: "${this.$store.getters.loggedInUserId}",\n`;
-      query += `recipientId: "${recipientId}"\n`;
-      query += '} ) { recordId } }';
+        encryptedText = await this.$store.dispatch(
+          'getWebWorkerResponse', {
+            messageType: 'encrypt', messagePayload: [ this.message, this.destinationPublicKey ]
+          });
 
-      try {
+        query  = 'mutation { messageCreateOne( record: {\n';
+        query += `text: """${encryptedText}""",\n`;
+        query += `subject: """${this.subject}""",\n`;
+        query += `publishedAt: "${new Date()}",\n`;
+        query += `authorId: "${this.$store.getters.loggedInUserId}",\n`;
+        query += `recipientId: "${recipientId}"\n`;
+        query += '} ) { recordId } }';
+
         await axios.post(process.env.VUE_APP_API || apiUrl, { query });
         this.sendSuccessful = true;
       } catch (error) {
         console.log(error);
+        console.log(query);
       }
     },
     async getMessagesSent() {
-      const query = `
-      query {
+      let query = `query {
         findFriendsPost(id: "${this.$store.getters.loggedInUserId}", type: "email-sent") {
           _id,
           text,
@@ -420,6 +426,25 @@ export default {
       }`;
       return axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
         this.messagesSent = response.data.data.findFriendsPost;
+
+        // decrypt
+        this.messagesSent.forEach(async (item) => {
+
+          query = `query {
+            userById(_id: "${item.recipientId}") {
+              publicKey
+              privateKey
+            }
+          }`;
+          const res = await axios.post(process.env.VUE_APP_API || apiUrl, { query });
+          this.privateKey = res.data.data.userById.privateKey;
+
+          item.text = await this.$store.dispatch(
+            'getWebWorkerResponse', {
+              messageType: 'decrypt', messagePayload: [ item.text, this.privateKey ]
+            });
+        });
+
         this.messages = response.data.data.findFriendsPost;
         this.people = [...new Set(this.messagesSent.map(a => a.recipientId))];
       }).catch(error => {
@@ -427,8 +452,16 @@ export default {
       });
     },
     async getMessagesReceived() {
-      const query = `
-      query {
+      let query = `query {
+        userById(_id: "${this.$store.getters.loggedInUserId}") {
+          publicKey
+          privateKey
+        }
+      }`;
+      const res = await axios.post(process.env.VUE_APP_API || apiUrl, { query });
+      this.privateKey = res.data.data.userById.privateKey;
+
+      query = `query {
         findFriendsPost(id: "${this.$store.getters.loggedInUserId}", type: "email-received") {
           _id,
           text,
@@ -442,6 +475,15 @@ export default {
       }`;
       return axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
         this.messagesReceived = response.data.data.findFriendsPost;
+
+        // decrypt
+        this.messagesReceived.forEach(async (item) => {
+          item.text = await this.$store.dispatch(
+            'getWebWorkerResponse', {
+              messageType: 'decrypt', messagePayload: [ item.text, this.privateKey ]
+            });
+        });
+
         this.messages = this.messages.concat(response.data.data.findFriendsPost);
         this.people = this.people.concat([...new Set(this.messagesReceived.map(a => a.authorId))]);
       }).catch(error => {

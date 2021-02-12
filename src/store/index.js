@@ -8,10 +8,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    cryptWorker: new Worker('crypto-worker.js'),
     token: localStorage.getItem('access_token') || null,
-    isProd: process.env.VUE_APP_API !== undefined,
+    isProd: process.env.VUE_APP_API !== undefined, // #todo not the right way works tho
   },
   getters : {
+    // cryptWorker (state) {
+    //   if (state.cryptWorker === null)
+    //     state.cryptWorker = new Worker('crypto-worker.js');
+    //   return state.cryptWorker;
+    // },
     loggedIn(state) {
       return state.token !== null;
     },
@@ -31,6 +37,31 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    /** Post a message to the web worker and return a promise that will resolve with the response.  */
+    getWebWorkerResponse (context, data) {
+      return new Promise((resolve) => {
+        // Generate a random message id to identify the corresponding event callback
+        const messageId = Math.floor(Math.random() * 100000)
+
+        // Post the message to the webworker
+        context.state.cryptWorker.postMessage([data.messageType, messageId].concat(data.messagePayload))
+
+        // Create a handler for the webworker message event
+        const handler = function (e) {
+          // Only handle messages with the matching message id
+          if (e.data[0] === messageId) {
+            // Remove the event listener once the listener has been called.
+            e.currentTarget.removeEventListener(e.type, handler)
+
+            // Resolve the promise with the message payload.
+            resolve(e.data[1])
+          }
+        }
+
+        // Assign the handler to the webworker 'message' event.
+        context.state.cryptWorker.addEventListener('message', handler)
+      })
+    },
     checkCurrentPassword(context, credentials) {
       return new Promise((resolve, reject) => {
         const query = `
