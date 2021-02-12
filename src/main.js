@@ -3,7 +3,9 @@ import App from './App'
 import router from './router'
 import './assets/styles/index.css';
 import store from './store';
+import LoadScript from 'vue-plugin-load-script';
 
+Vue.use(LoadScript);
 Vue.config.productionTip = false
 
 export const bus = new Vue();

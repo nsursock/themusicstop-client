@@ -266,7 +266,9 @@ import { apiUrl } from '@/env.json'
 import axios from 'axios'
 
 export default {
-  mounted: function () {
+  async mounted () {
+    await this.$loadScript("https://js.stripe.com/v3/")
+
     var self=this;
     self.stripe= window.Stripe(self.spk);
     self.card = self.stripe.elements().create('card');

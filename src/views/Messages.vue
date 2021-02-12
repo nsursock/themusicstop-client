@@ -257,7 +257,7 @@
           </div>
           <div class="px-3 flex-1 overflow-y-auto">
             <button v-for="(message, index) in messagesFiltered" :key="index"
-            @focus="receiver = person(messagesFiltered[index].talkerId).email, selectedId = messagesFiltered[index]._id"
+            @click="receiver = person(messagesFiltered[index].talkerId).email, selectedId = messagesFiltered[index]._id"
             class="mt-3 px-10 pt-6 pb-8 mt-2 bg-white rounded-lg shadow w-full">
               <div class="flex items-center justify-between">
                 <p v-if="person(message.talkerId)" class="text-lg font-semibold">
