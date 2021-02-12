@@ -41,9 +41,9 @@
   </div>
   <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
     <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-     srcset="https://source.unsplash.com/random/1024x768/?music 1024w, https://source.unsplash.com/random/1920x1280/?music 1920w"
-     sizes="(min-width: 800px) 1920px, 100vw"
-     alt="poker cards on brown table" src="https://source.unsplash.com/random/1680x1050/?music">
+     srcset="https://source.unsplash.com/random/480x320/?music 480w, https://source.unsplash.com/random/800x600/?music 800w"
+     sizes="(min-width: 800px) 800px, 100vw"
+     alt="poker cards on brown table" src="https://source.unsplash.com/random/800x600/?music">
   </div>
 </div>
 
