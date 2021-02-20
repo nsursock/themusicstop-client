@@ -8,6 +8,9 @@ import LoadScript from 'vue-plugin-load-script';
 Vue.use(LoadScript);
 Vue.config.productionTip = false
 
+Vue.prototype.winWidth = window.innerWidth;
+Vue.prototype.winHeight = window.innerHeight;
+
 export const bus = new Vue();
 
 router.beforeEach((to, from, next) => {

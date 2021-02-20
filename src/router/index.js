@@ -8,6 +8,7 @@ import Donation from '@/views/Donation'
 // import Settings from '@/views/Settings'
 
 const Users = () => import(/* webpackChunkName: "social" */ '@/views/Users')
+const Networks = () => import(/* webpackChunkName: "guests" */ '@/views/Networks')
 const Home = () => import(/* webpackChunkName: "social" */ '@/views/Home')
 const Messages = () => import(/* webpackChunkName: "social" */ '@/views/Messages')
 const Settings = () => import(/* webpackChunkName: "config" */ '@/views/Settings')
@@ -22,6 +23,7 @@ const routes = [
   { path: '/home', name: 'Home', component: Home, meta: { requiresAuth: true } },
   { path: '/messages', name: 'Messages', component: Messages, meta: { requiresAuth: true } },
   { path: '/users', name: 'Users', component: Users, meta: { requiresAuth: true } },
+  { path: '/networks', name: 'Networks', component: Networks },
   { path: '/settings', name: 'Settings', component: Settings, meta: { requiresAuth: true } }
 ];
 

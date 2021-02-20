@@ -36,7 +36,7 @@
                   <textarea v-model="about" id="about" name="about" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder=""></textarea>
                 </div>
                 <p class="mt-2 text-sm text-gray-500">
-                  Brief description for your profile (45 characters minimum).
+                  Brief description for your profile: quick introduction (name, styles, influences), background (longevity, bands, notable accomplishments), current situation (touring, writing, latest album...).
                 </p>
               </div>
 

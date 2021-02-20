@@ -1,6 +1,6 @@
 <template>
 <div>
-<div class="relative bg-white overflow-hidden">
+<section class="relative bg-white overflow-hidden">
   <div class="max-w-7xl mx-auto">
     <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
       <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
@@ -45,7 +45,7 @@
      sizes="(min-width: 800px) 800px, 100vw"
      alt="poker cards on brown table" src="https://source.unsplash.com/random/800x600/?music">
   </div>
-</div>
+</section>
 
 <section id='feat' class="py-12 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -139,6 +139,50 @@
       </dl>
     </div>
   </div>
+</section>
+
+<section class="mb-5 py-12 bg-white">
+<div class="flex flex-col md:flex-row mx-4  items-center md:items-start max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="divide-y divide-gray-300 md:w-1/2 my-auto">
+    <div class=" mb-5 w-full flex flex-col justify-center items-center md:items-start">
+      <div class="flex-shrink-0 mb-5">
+        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+          </svg>
+        </div>
+      </div>
+      <div class=" text-center md:text-left ">
+        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          Visualize your network easily
+        </p>
+        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          This is the only social network that lets you see your network drawn by a force-directed algorithm.
+          Get to discover all your connections simply and know who you should talk to for your next project.
+        </p>
+      </div>
+      <div class="rounded-md shadow mt-5">
+        <button @click="handleStart" class="w-full flex items-center justify-center  border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:text-lg py-2 px-3">
+          Get started
+        </button>
+      </div>
+    </div>
+    <!-- <div class="">
+      <p class="mt-4 max-w-2xl text-md text-gray-500 lg:mx-auto">
+        "This is the only social network that lets you see your network drawn by a force-directed algorithm."
+      </p>
+      <div class=" flex items-center rounded-full mt-2">
+        <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1613397872515-48d9ad393758?crop=entropy&cs=tinysrgb&fit=facearea&facepad=3.5&fm=jpg&h=500&ixid=MXwxfDB8MXxyYW5kb218fHx8fHx8fA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=500" alt="">
+        <span class="ml-3 text-md text-gray-800 font-semibold">
+          Remi Cochi, Airline Pilot
+        </span>
+      </div>
+    </div> -->
+  </div>
+  <div class="md:w-1/2 my-auto">
+    <img src="../assets/images/graph.jpg" alt="">
+  </div>
+</div>
 </section>
 
 </div>

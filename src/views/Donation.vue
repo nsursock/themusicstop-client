@@ -36,7 +36,7 @@
               <div class="px-4 sm:px-0">
                 <h3 class="text-lg font-medium leading-6 text-gray-900">Donate</h3>
                 <p class="mt-1 text-sm text-gray-600">
-                  Please enter the amount. But 3$ to get a coffee is fine. Anonymous donations are allowed.
+                  Please enter the amount. 3$ to get a coffee ☕ is fine. Anonymous donations are allowed.
                 </p>
               </div>
             </div>
