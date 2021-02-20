@@ -98,7 +98,7 @@ export default {
       if (energy <= this.minEnergyThreshold || iter >= this.maxNumIterations) {
         clearInterval(timer);
       }
-      console.log(`Iteration #${iter} | Energy: ${energy}`);
+      //console.log(`Iteration #${iter} | Energy: ${energy}`);
     }, tickstep);
   },
   methods: {

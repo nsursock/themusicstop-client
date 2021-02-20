@@ -159,7 +159,14 @@
   <div v-bind:class="showMobileMenu ? 'block' : 'hidden'" class="sm:hidden">
     <div class="px-2 pt-2 pb-3 space-y-1">
       <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-      <router-link v-bind:class="$route.name === 'Home' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" block px-3 py-2 rounded-md text-base font-medium" v-bind:to="{ name: 'Home' }">Home</router-link>
+      <router-link v-bind:class="$route.name === 'Networks' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'"
+      class=" block px-3 py-2 rounded-md text-base font-medium" v-bind:to="{ name: 'Networks' }">
+        Networks
+      </router-link>
+      <router-link v-bind:class="$route.name === 'Home' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'"
+      class=" block px-3 py-2 rounded-md text-base font-medium" v-bind:to="{ name: 'Home' }">
+        Home
+      </router-link>
       <router-link v-bind:class="$route.name === 'Messages' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" block px-3 py-2 rounded-md text-base font-medium" v-bind:to="{ name: 'Messages' }">Messages</router-link>
       <!-- <router-link v-bind:class="$route.name === 'About' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" block px-3 py-2 rounded-md text-base font-medium" v-bind:to="{ name: 'About' }">About</router-link> -->
       <router-link v-bind:class="$route.name === 'Users' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" block px-3 py-2 rounded-md text-base font-medium" v-bind:to="{ name: 'Users' }">Members</router-link>
