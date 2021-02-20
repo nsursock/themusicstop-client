@@ -5,7 +5,7 @@
     <span>#nodes: {{nodes.length}}</span>&nbsp;
     <span>#edges: {{edges.length}}</span>
   </div> -->
-  <div @focus="toggleCard" v-for="node in nodes" :key="node.key" class="rounded-full absolute focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+  <div @focus="toggleCard" v-for="node in nodes" :key="node.key" class="z-10 rounded-full absolute focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
   v-bind:style="{ left: node.pos.x + 'px', top: node.pos.y + 'px' }">
     <div class="w-10 border-2 border-gray-300 rounded-full overflow-hidden flex justify-center items-center">
       <img v-if="node.profileImage" :src="node.profileImage" class="h-full w-full object-cover" />
