@@ -257,7 +257,7 @@
           </div>
           <div class="px-3 flex-1 overflow-y-auto mb-3">
             <button v-for="(message, index) in messagesFiltered" :key="index"
-            @click="receiver = person(messagesFiltered[index].talkerId).email, selectedId = messagesFiltered[index]._id"
+            @click="receiver = person(messagesFiltered[index].talkerId).userName, selectedId = messagesFiltered[index]._id"
             class="mt-3 px-10 pt-6 pb-8 mt-2 bg-white rounded-lg shadow w-full">
               <div class="flex items-center justify-between">
                 <p v-if="person(message.talkerId)" class="text-lg font-semibold">
@@ -266,7 +266,10 @@
                 </p>
                 <div class="flex items-center">
                   <span class="text-sm text-gray-600">{{ message.publishedAt | formatDate('MMM D, YY') }} at {{ message.publishedAt | formatDate('h:mm A') }}</span>
-                  <img v-if="person(message.authorId)" class="ml-5 h-9 w-9 rounded-full object-cover" :src="person(message.authorId).profileImage" alt="">
+                  <svg v-if="!person(message.authorId).profileImage" class="ml-5 h-9 w-9 rounded-full object-cover text-gray-300 bg-gray-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                  <img v-else-if="person(message.authorId)" class="ml-5 h-9 w-9 rounded-full object-cover" :src="person(message.authorId).profileImage" alt="">
                 </div>
               </div>
               <div class="mt-6 text-gray-800 text-sm">
@@ -338,12 +341,14 @@ export default {
     if (this.$route.query.email) {
         this.recipient = this.$route.query.email;
         this.showModal = true;
+    } else if (this.$route.query.user) {
+        this.recipient = this.$route.query.user;
+        this.showModal = true;
     }
   },
   methods: {
     async getUniquePeople() {
       this.people.push(this.$store.getters.loggedInUserId);
-      //const unique = this.people.filter((value, index, self) => self.indexOf(value) === index);
       const query = `query {
         findAuthors(
           authorIds: [${this.people.map(x => `"` + x + `"`)}]
@@ -353,6 +358,7 @@ export default {
           firstName
           lastName
           email
+          userName
         }
       }`;
       return axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
@@ -383,7 +389,7 @@ export default {
       let query, encryptedText, recipientId;
       try {
         query = `query { userOne(filter: {
-          email: "${this.recipient}"
+          userName: "${this.recipient}"
         }) {  recipientId: _id
               key: publicKey }
         }`;

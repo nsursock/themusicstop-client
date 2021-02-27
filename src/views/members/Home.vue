@@ -168,7 +168,10 @@
                 <span class="text-sm text-gray-600">{{ post.publishedAt | formatDate('MMM D, YY') }} at {{ post.publishedAt | formatDate('h:mm A') }}</span>
                 <span class="text-gray-500 text-right">{{ author(post.authorId).firstName }} {{ author(post.authorId).lastName }}</span>
               </div>
-              <img class="ml-5 h-9 w-9 rounded-full object-cover" :src="author(post.authorId).profileImage" alt="">
+              <svg v-if="!author(post.authorId).profileImage" class="ml-5 h-9 w-9 rounded-full object-cover text-gray-300 bg-gray-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+              <img v-else class="ml-5 h-9 w-9 rounded-full object-cover" :src="author(post.authorId).profileImage" alt="">
             </div>
           </div>
           <div class="">
@@ -212,7 +215,10 @@
                         <span class="text-sm text-gray-600">{{ comment.publishedAt | formatDate('MMM D, YY') }} at {{ comment.publishedAt | formatDate('h:mm A') }}</span>
                         <span class="text-gray-500 text-right">{{ author(comment.authorId).firstName }} {{ author(comment.authorId).lastName }}</span>
                       </div>
-                      <img class="ml-5 h-9 w-9 rounded-full object-cover" :src="author(comment.authorId).profileImage" alt="">
+                      <svg v-if="!author(comment.authorId).profileImage" class="ml-5 h-9 w-9 rounded-full object-cover text-gray-300 bg-gray-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                      </svg>
+                      <img v-else class="ml-5 h-9 w-9 rounded-full object-cover" :src="author(comment.authorId).profileImage" alt="">
                     </aside>
                     <p>{{ comment.text }}</p>
                   </div>
@@ -243,13 +249,18 @@
       <div class="divide-y divide-gray-300">
         <div v-for="(activity, index) in activities" :key="index" class="mx-4 flex flex-col justify-between">
           <div class="flex items-start justify-between">
-            <img class="m-2 h-9 w-9 rounded-full object-cover" :src="author(activity.authorId).profileImage" alt="">
+            <div class="">
+              <svg v-if="!author(activity.authorId).profileImage" class="mr-3 m-2 h-9 w-9 rounded-full object-cover text-gray-300 bg-gray-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+              <img v-else class="m-2 h-9 w-9 rounded-full object-cover mr-7" :src="author(activity.authorId).profileImage" alt="">
+            </div>
             <div class="my-3 w-8/12 flex flex-col">
               {{ author(activity.authorId).firstName }} {{ author(activity.authorId).lastName }}
               <span class="text-gray-500">{{ activity.text }}</span>
             </div>
             <div class="text-gray-500 m-3 w-20">
-              {{ activity.publishedAt | formatDate('MMM D') }} at {{ activity.publishedAt | formatDate('h:mm A') }}
+              {{ activity.publishedAt | formatDate('MMM D, YY') }} at {{ activity.publishedAt | formatDate('h:mm A') }}
             </div>
           </div>
 
@@ -600,7 +611,7 @@ export default {
       sortedAsc: true,
       showNews: true,
       showActivity: false,
-      showDropdown: true,
+      showDropdown: false,
     }
   }
 }

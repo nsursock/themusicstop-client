@@ -734,6 +734,7 @@ module.exports = {
   variants: {
     extend: {
       display: ['hover'],
+      backgroundColor: ['even', 'odd'],
     },
     accessibility: ['responsive', 'focus-within', 'focus'],
     alignContent: ['responsive'],

@@ -77,8 +77,8 @@
       <button @click="isViewTable = !isViewTable" type="button" class="ml-2 inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
         <svg v-show="!isViewTable" class="mr-1 w-5 h-5 fill-current text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M4 8h16V5H4v3zm10 11v-9h-4v9h4zm2 0h4v-9h-4v9zm-8 0v-9H4v9h4zM3 3h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/></svg>
         <svg v-show="isViewTable" class="mr-1 w-5 h-5 fill-current text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M21 3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h18zM11 13H4v6h7v-6zm9 0h-7v6h7v-6zm-9-8H4v6h7V5zm9 0h-7v6h7V5z"/></svg>
-        <span v-show="isViewTable">Cards</span>
-        <span v-show="!isViewTable">Table</span>
+        <span v-show="isViewTable">Compact</span>
+        <span v-show="!isViewTable">Expanded</span>
       </button>
     </span>
   </div>
@@ -169,6 +169,7 @@
                 </svg>
                 <img v-else class=" w-24 h-24 sm:w-40 sm:h-40 sm:ml-5 -mt-10 sm:-mt-24 rounded-lg shadow-md border-white border-4" :src="member.profileImage" :alt="`Profile photo of ${member.fullname}`">
                 <h1 class="mt-3  text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl md:text-5xl">{{ member.fullname}}</h1>
+                <span class="text-gray-600">@{{ member.username }}</span>
               </div>
               <div class="mt-5 flex  lg:ml-4 w-screen mx-5">
                 <span class="sm:ml-3 sm:w-40 w-24">
@@ -284,6 +285,7 @@ export default {
         profileImage: '',
         coverImage: '',
         fullname: '',
+        username: '',
         email: '',
         about: '',
         location: '',
@@ -321,7 +323,8 @@ export default {
   },
   methods: {
     sendMessage: function() {
-      this.$router.push({ path: 'messages', query: { email: this.member.email }});
+      this.$router.push({ path: 'messages', query: { user: this.member.username }});
+      // this.$router.push({ path: 'messages', query: { email: this.member.email }});
     },
     viewProfile: function(id) {
       this.showProfileSlide = !this.showProfileSlide;
@@ -332,6 +335,7 @@ export default {
       this.member.profileImage = current.profileImage;
       this.member.coverImage = current.coverImage;
       this.member.fullname = current.firstName + ' ' + current.lastName;
+      this.member.username = current.userName;
       this.member.email = current.email;
       this.member.about = current.about;
       this.member.location = current.city + ', ' + current.country;
@@ -375,7 +379,7 @@ export default {
       // #todo watch out for limit, paginate?
       const query = `
         query {
-          userMany(sort: _ID_DESC, limit: 2000) {
+          userMany(limit: 2000) {
             _id
             website
             about
@@ -384,6 +388,7 @@ export default {
             birthday
             gender
             email
+            userName
             password
             country
             city

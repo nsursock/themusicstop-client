@@ -13,11 +13,6 @@ export default new Vuex.Store({
     isProd: process.env.VUE_APP_API !== undefined, // #todo not the right way works tho
   },
   getters : {
-    // cryptWorker (state) {
-    //   if (state.cryptWorker === null)
-    //     state.cryptWorker = new Worker('crypto-worker.js');
-    //   return state.cryptWorker;
-    // },
     loggedIn(state) {
       return state.token !== null;
     },
@@ -95,10 +90,10 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         const query = `
           mutation {
-            login(record: {
-              email: "${credentials.email}",
+            login(
+              username: "${credentials.username}",
               password: "${credentials.password}"
-            })
+            )
           }`;
         axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
           const token = response.data.data.login;
@@ -120,6 +115,7 @@ export default new Vuex.Store({
                 firstName: "${data.firstname}"
                 lastName: "${data.lastname}"
                 email: "${data.email}"
+                userName: "${data.username}"
                 password: "${data.password}"
                 birthday: "${data.birthday}"
                 gender: "${data.gender}"

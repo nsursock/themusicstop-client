@@ -232,8 +232,8 @@
             <input type="hidden" name="remember" value="true">
             <div class="rounded-md shadow-sm -space-y-px">
               <div>
-                <label for="email-address1" class="sr-only">Email address</label>
-                <input v-model="user.email" id="email-address1" name="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address">
+                <label for="user-name" class="sr-only">User name</label>
+                <input v-model="user.username" id="user-name" name="username" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="User name">
               </div>
               <div>
                 <label for="password1" class="sr-only">Password</label>
@@ -322,6 +322,10 @@
                     <input v-model="user.email" id="email-address2" name="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address">
                   </div>
                   <div>
+                    <label for="user-name" class="sr-only">User name</label>
+                    <input v-model="user.username" id="user-name" name="username" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="User name">
+                  </div>
+                  <div>
                     <label for="first-name" class="sr-only">First name</label>
                     <input v-model="user.firstname" id="first-name" name="firstname" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="First name">
                   </div>
@@ -337,20 +341,20 @@
               </div>
 
               <div v-show="currentStep === 2" class="">
-                  <div class="flex items-center justify-center space-x-2 py-2 h-10 border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 border rounded-md">
+                  <div class="flex items-center justify-center space-x-2 py-2 h-10 border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 border rounded-t-md">
                     <input v-model="user.gender" type="radio" required id="male" name="gender" value="M" class="ml-3">
                     <label for="male" class="block text-sm font-medium text-gray-700">Male</label><br>
                     <input v-model="user.gender" type="radio" required id="female" name="gender" value="F">
                     <label for="female" class="block text-sm font-medium text-gray-700">Female</label><br>
                   </div>
                   <label for="birthday" class="sr-only">Birthday</label>
-                  <input v-model="user.birthday" id="birthday" name="birthday" type="text" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Birthday (yyyy-mm-dd)">
+                  <input v-model="user.birthday" id="birthday" name="birthday" type="text" required class=" focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 " placeholder="Birthday (yyyy-mm-dd)">
                   <!-- <input v-model="dob" @focus="type = 'date'" id="birthday" name="birthday" :type="type" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Birthday"> -->
 
                   <label for="city" class="sr-only">City</label>
-                  <input v-model="user.city" type="text" name="city" id="city" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="City">
+                  <input v-model="user.city" type="text" name="city" id="city" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 " placeholder="City">
                   <label for="country" class="sr-only">Country</label>
-                  <input v-model="user.country" type="text" name="country" id="country" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Country">
+                  <input v-model="user.country" type="text" name="country" id="country" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-b-md" placeholder="Country">
               </div>
 
               <div v-show="currentStep !== lastStep" class="flex items-center justify-center space-x-3">
@@ -497,6 +501,7 @@ export default {
 
       user: {
         email: '',
+        username: '',
         firstname: '',
         lastname: '',
         password: '',
@@ -607,7 +612,7 @@ export default {
     },
     handleLogin: function() {
       this.$store.dispatch('retrieveToken', {
-        email: this.user.email,
+        username: this.user.username,
         password: this.user.password
       }).then( () => {
         this.showModal = false;
@@ -619,6 +624,7 @@ export default {
         firstname: this.user.firstname,
         lastname: this.user.lastname,
         email: this.user.email,
+        username: this.user.username,
         password: this.user.password,
         birthday: this.user.birthday,
         gender: this.user.gender,
