@@ -70,7 +70,7 @@
   </div>
 </div>
 
-    <div v-show="window.width >= 1024 || showNews" class="lg:w-6/12 w-full xl:w-7/12 border-r border-gray-300 divide-y divide-gray-300 md:overflow-y-auto">
+    <div v-show="window.width >= 1024 || showNews" class="lg:w-6/12 w-full xl:w-7/12 border-r border-gray-300 divide-y divide-gray-300 overflow-hidden overflow-y-auto">
       <div class="flex items-center justify-between m-3">
         News feed
         <div class="float-right flex items-center">
@@ -93,8 +93,8 @@
           </button>
           <div v-show="showDropdown" class="w-full origin-top-right absolute right-0 mt-2  rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5" aria-labelledby="mobile-menu" role="menu">
             <button @click="showPublish = true, showDropdown = false" class="text-left w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Publish</button>
-            <button @click="showNews = true, showActivity = false" class="text-left w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">News</button>
-            <button @click="showNews = false, showActivity = true" class="text-left w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Activity</button>
+            <button @click="showNews = true, showActivity = false, showDropdown = false" class="text-left w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">News</button>
+            <button @click="showNews = false, showActivity = true, showDropdown = false" class="text-left w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Activity</button>
           </div>
         </span>
       </div>
@@ -135,25 +135,25 @@
         <svg class="h-6 w-6 fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 14h-2a8.999 8.999 0 0 0-7.968 4.81A10.136 10.136 0 0 1 3 18C3 12.477 7.477 8 13 8V2.5L23.5 11 13 19.5V14zm-2-2h4v3.308L20.321 11 15 6.692V10h-2a7.982 7.982 0 0 0-6.057 2.773A10.988 10.988 0 0 1 11 12z"/></svg>
         Share
       </button>
-      <button @click="incrementLike(post._id)" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+      <button @click="incrementLike(post._id, 'message')" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
         <svg class="h-6 w-6 fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
           <path fill="none" d="M0 0h24v24H0z"/><path d="M14.6 8H21a2 2 0 0 1 2 2v2.104a2 2 0 0 1-.15.762l-3.095 7.515a1 1 0 0 1-.925.619H2a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1h3.482a1 1 0 0 0 .817-.423L11.752.85a.5.5 0 0 1 .632-.159l1.814.907a2.5 2.5 0 0 1 1.305 2.853L14.6 8zM7 10.588V19h11.16L21 12.104V10h-6.4a2 2 0 0 1-1.938-2.493l.903-3.548a.5.5 0 0 0-.261-.571l-.661-.33-4.71 6.672c-.25.354-.57.644-.933.858zM5 11H3v8h2v-8z"/>
         </svg>
         Like
       </button>
-      <button @click="incrementLove(post._id)" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+      <button @click="incrementLove(post._id, 'message')" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
         <svg class="h-6 w-6 fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
           <path fill="none" d="M0 0H24V24H0z"/><path d="M20.243 4.757c2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236 2.265-2.264 5.888-2.34 8.244-.228 2.349-2.109 5.979-2.039 8.242.228zM5.172 6.172c-1.49 1.49-1.565 3.875-.192 5.451L12 18.654l7.02-7.03c1.374-1.577 1.299-3.959-.193-5.454-1.487-1.49-3.881-1.562-5.453-.186l-4.202 4.203-1.415-1.414 2.825-2.827-.082-.069c-1.575-1.265-3.877-1.157-5.328.295z"/>
         </svg>
         Love
       </button>
-      <button @click="incrementHaha(post._id)" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+      <button @click="incrementHaha(post._id, 'message')" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
         <svg class="h-6 w-6 fill-current mr-2"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
           <path fill="none" d="M0 0h24v24H0z"/><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 7c2 0 3.667.333 5 1a5 5 0 0 1-10 0c1.333-.667 3-1 5-1zM8.5 7a2.5 2.5 0 0 1 2.45 2h-4.9A2.5 2.5 0 0 1 8.5 7zm7 0a2.5 2.5 0 0 1 2.45 2h-4.9a2.5 2.5 0 0 1 2.45-2z"/>
         </svg>
         Haha
       </button>
-      <button @click="incrementSad(post._id)" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+      <button @click="incrementSad(post._id, 'message')" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
         <svg class="h-6 w-6 fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
           <path fill="none" d="M0 0h24v24H0z"/><path d="M12 2c5.523 0 10 4.477 10 10 0 .727-.077 1.435-.225 2.118l-1.782-1.783a8 8 0 1 0-4.375 6.801 3.997 3.997 0 0 0 1.555 1.423A9.956 9.956 0 0 1 12 22C6.477 22 2 17.523 2 12S6.477 2 12 2zm7 12.172l1.414 1.414a2 2 0 1 1-2.93.11l.102-.11L19 14.172zM12 15c1.466 0 2.785.631 3.7 1.637l-.945.86C13.965 17.182 13.018 17 12 17c-1.018 0-1.965.183-2.755.496l-.945-.86A4.987 4.987 0 0 1 12 15zm-3.5-5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm7 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/>
         </svg>
@@ -230,7 +230,7 @@
       </div>
     </div>
 
-    <div v-show="window.width >= 1024 || showActivity" class="lg:w-4/12 w-full xl:w-3/12 text-sm bg-gray-50 md:overflow-y-auto">
+    <div v-show="window.width >= 1024 || showActivity" class="lg:w-4/12 w-full xl:w-3/12 text-sm bg-gray-50 overflow-y-auto overflow-hidden">
       <div class="font-semibold m-5 flex items-center justify-between">
         <span>Activity feed</span>
         <span class=" relative lg:hidden">
@@ -241,8 +241,8 @@
             </svg>
           </button>
           <div v-show="showDropdown" class="w-full origin-top-right absolute right-0 mt-2  rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5" aria-labelledby="mobile-menu" role="menu">
-            <button @click="showNews = true, showActivity = false" class="text-left w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">News</button>
-            <button @click="showNews = false, showActivity = true" class="text-left w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Activity</button>
+            <button @click="showNews = true, showActivity = false, showDropdown = false" class="text-left w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">News</button>
+            <button @click="showNews = false, showActivity = true, showDropdown = false" class="text-left w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Activity</button>
           </div>
         </span>
       </div>
@@ -257,10 +257,20 @@
             </div>
             <div class="my-3 w-8/12 flex flex-col">
               {{ author(activity.authorId).firstName }} {{ author(activity.authorId).lastName }}
-              <span class="text-gray-500">{{ activity.text }}</span>
+              <span v-if="activity.text" class="text-gray-500">{{ activity.text }}</span>
+              <div v-else-if="activity.songId" class="text-gray-500">
+                rated <span class="text-purple-500 font-semibold">{{ activity.rating }} </span>
+                <div class="flex items-center inline-flex">
+                  <svg v-for="(star, index) in 5" :key="index" :class="star <= ratingStar(activity.rating) ? 'text-purple-500' : 'text-gray-300'" class="h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                </div>
+                the song {{ song(activity.songId).title }} by {{ song(activity.songId).artist }} on {{ song(activity.songId).album }}
+                <p class="inline" v-if="activity.review && activity.review !== 'null'"> and added: "{{ activity.review }}"</p>
+              </div>
             </div>
-            <div class="text-gray-500 m-3 w-20">
-              {{ activity.publishedAt | formatDate('MMM D, YY') }} at {{ activity.publishedAt | formatDate('h:mm A') }}
+            <div class="text-gray-500 m-3 w-24 text-xs">
+              {{ activity.createdAt | formatDate('MMM D, YY') }} at {{ activity.createdAt | formatDate('h:mm A') }}
             </div>
           </div>
 
@@ -308,25 +318,49 @@
               <div v-show="showReactMenu2[index]" class="z-10 origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                 <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
 
-                  <button @click="incrementLike(activity._id)" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+                  <button v-if="activity.text" @click="incrementLike(activity._id, 'message')" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
                     <svg class="h-6 w-6 fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                       <path fill="none" d="M0 0h24v24H0z"/><path d="M14.6 8H21a2 2 0 0 1 2 2v2.104a2 2 0 0 1-.15.762l-3.095 7.515a1 1 0 0 1-.925.619H2a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1h3.482a1 1 0 0 0 .817-.423L11.752.85a.5.5 0 0 1 .632-.159l1.814.907a2.5 2.5 0 0 1 1.305 2.853L14.6 8zM7 10.588V19h11.16L21 12.104V10h-6.4a2 2 0 0 1-1.938-2.493l.903-3.548a.5.5 0 0 0-.261-.571l-.661-.33-4.71 6.672c-.25.354-.57.644-.933.858zM5 11H3v8h2v-8z"/>
                     </svg>
                     Like
                   </button>
-                  <button @click="incrementLove(activity._id)" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+                  <button v-else-if="activity.rating" @click="incrementLike(activity._id, 'ratingHist')" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+                    <svg class="h-6 w-6 fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                      <path fill="none" d="M0 0h24v24H0z"/><path d="M14.6 8H21a2 2 0 0 1 2 2v2.104a2 2 0 0 1-.15.762l-3.095 7.515a1 1 0 0 1-.925.619H2a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1h3.482a1 1 0 0 0 .817-.423L11.752.85a.5.5 0 0 1 .632-.159l1.814.907a2.5 2.5 0 0 1 1.305 2.853L14.6 8zM7 10.588V19h11.16L21 12.104V10h-6.4a2 2 0 0 1-1.938-2.493l.903-3.548a.5.5 0 0 0-.261-.571l-.661-.33-4.71 6.672c-.25.354-.57.644-.933.858zM5 11H3v8h2v-8z"/>
+                    </svg>
+                    Like
+                  </button>
+                  <button v-if="activity.text" @click="incrementLove(activity._id, 'message')" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
                     <svg class="h-6 w-6 fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                       <path fill="none" d="M0 0H24V24H0z"/><path d="M20.243 4.757c2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236 2.265-2.264 5.888-2.34 8.244-.228 2.349-2.109 5.979-2.039 8.242.228zM5.172 6.172c-1.49 1.49-1.565 3.875-.192 5.451L12 18.654l7.02-7.03c1.374-1.577 1.299-3.959-.193-5.454-1.487-1.49-3.881-1.562-5.453-.186l-4.202 4.203-1.415-1.414 2.825-2.827-.082-.069c-1.575-1.265-3.877-1.157-5.328.295z"/>
                     </svg>
                     Love
                   </button>
-                  <button @click="incrementHaha(activity._id)" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+                  <button v-else-if="activity.rating" @click="incrementLove(activity._id, 'ratingHist')" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+                    <svg class="h-6 w-6 fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                      <path fill="none" d="M0 0H24V24H0z"/><path d="M20.243 4.757c2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236 2.265-2.264 5.888-2.34 8.244-.228 2.349-2.109 5.979-2.039 8.242.228zM5.172 6.172c-1.49 1.49-1.565 3.875-.192 5.451L12 18.654l7.02-7.03c1.374-1.577 1.299-3.959-.193-5.454-1.487-1.49-3.881-1.562-5.453-.186l-4.202 4.203-1.415-1.414 2.825-2.827-.082-.069c-1.575-1.265-3.877-1.157-5.328.295z"/>
+                    </svg>
+                    Love
+                  </button>
+                  <button v-if="activity.text" @click="incrementHaha(activity._id, 'message')" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
                     <svg class="h-6 w-6 fill-current mr-2"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                       <path fill="none" d="M0 0h24v24H0z"/><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 7c2 0 3.667.333 5 1a5 5 0 0 1-10 0c1.333-.667 3-1 5-1zM8.5 7a2.5 2.5 0 0 1 2.45 2h-4.9A2.5 2.5 0 0 1 8.5 7zm7 0a2.5 2.5 0 0 1 2.45 2h-4.9a2.5 2.5 0 0 1 2.45-2z"/>
                     </svg>
                     Haha
                   </button>
-                  <button @click="incrementSad(activity._id)" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+                  <button v-else-if="activity.rating" @click="incrementHaha(activity._id, 'ratingHist')" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+                    <svg class="h-6 w-6 fill-current mr-2"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                      <path fill="none" d="M0 0h24v24H0z"/><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 7c2 0 3.667.333 5 1a5 5 0 0 1-10 0c1.333-.667 3-1 5-1zM8.5 7a2.5 2.5 0 0 1 2.45 2h-4.9A2.5 2.5 0 0 1 8.5 7zm7 0a2.5 2.5 0 0 1 2.45 2h-4.9a2.5 2.5 0 0 1 2.45-2z"/>
+                    </svg>
+                    Haha
+                  </button>
+                  <button v-if="activity.text" @click="incrementSad(activity._id, 'message')" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+                    <svg class="h-6 w-6 fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                      <path fill="none" d="M0 0h24v24H0z"/><path d="M12 2c5.523 0 10 4.477 10 10 0 .727-.077 1.435-.225 2.118l-1.782-1.783a8 8 0 1 0-4.375 6.801 3.997 3.997 0 0 0 1.555 1.423A9.956 9.956 0 0 1 12 22C6.477 22 2 17.523 2 12S6.477 2 12 2zm7 12.172l1.414 1.414a2 2 0 1 1-2.93.11l.102-.11L19 14.172zM12 15c1.466 0 2.785.631 3.7 1.637l-.945.86C13.965 17.182 13.018 17 12 17c-1.018 0-1.965.183-2.755.496l-.945-.86A4.987 4.987 0 0 1 12 15zm-3.5-5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm7 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/>
+                    </svg>
+                    Sad
+                  </button>
+                  <button v-else-if="activity.rating" @click="incrementSad(activity._id, 'ratingHist')" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
                     <svg class="h-6 w-6 fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                       <path fill="none" d="M0 0h24v24H0z"/><path d="M12 2c5.523 0 10 4.477 10 10 0 .727-.077 1.435-.225 2.118l-1.782-1.783a8 8 0 1 0-4.375 6.801 3.997 3.997 0 0 0 1.555 1.423A9.956 9.956 0 0 1 12 22C6.477 22 2 17.523 2 12S6.477 2 12 2zm7 12.172l1.414 1.414a2 2 0 1 1-2.93.11l.102-.11L19 14.172zM12 15c1.466 0 2.785.631 3.7 1.637l-.945.86C13.965 17.182 13.018 17 12 17c-1.018 0-1.965.183-2.755.496l-.945-.86A4.987 4.987 0 0 1 12 15zm-3.5-5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm7 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/>
                     </svg>
@@ -362,7 +396,12 @@ export default {
   async mounted() {
     await this.getPostsFromFriends();
     await this.getActivityFromFriends();
+    await this.getRatingActivityFromFriends();
+    this.activities.sort((a, b) => {
+      return -(new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+    });
     this.getUniqueAuthors();
+    this.getUniqueSongs();
 
     this.posts.forEach((item, index) => {
       this.showReactMenu[index] = false;
@@ -377,13 +416,29 @@ export default {
   },
 
   methods: {
-    async incrementLike(id) {
-      let query = `query { messageById(_id: "${id}") { numLike } }`;
+    ratingStar(rating100) {
+      if (rating100 == 0)
+        return 0;
+      else if (rating100 <= 20)
+        return 1;
+      else if (rating100 <= 40)
+        return 2;
+      else if (rating100 <= 60)
+        return 3;
+      else if (rating100 <= 80)
+        return 4;
+      else if (rating100 <= 100)
+        return 5;
+    },
+    async incrementLike(id, type) {
+      let query = `query { ${type}ById(_id: "${id}") { numLike } }`;
       axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(async response => {
-        let n = response.data.data.messageById.numLike;
+        let n;
+        if (type == 'message') n = response.data.data.messageById.numLike;
+        else if (type == 'ratingHist') n = response.data.data.ratingHistById.numLike;
 
         query = `mutation {
-          messageUpdateById(
+          ${type}UpdateById(
             _id: "${id}"
             record: { numLike: ${n+1} }
           ) {
@@ -400,13 +455,15 @@ export default {
         console.log(error);
       });
     },
-    async incrementLove(id) {
-      let query = `query { messageById(_id: "${id}") { numLove } }`;
+    async incrementLove(id, type) {
+      let query = `query { ${type}ById(_id: "${id}") { numLove } }`;
       axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(async response => {
-        let n = response.data.data.messageById.numLove;
+        let n;
+        if (type == 'message') n = response.data.data.messageById.numLove;
+        else if (type == 'ratingHist') n = response.data.data.ratingHistById.numLove;
 
         query = `mutation {
-          messageUpdateById(
+          ${type}UpdateById(
             _id: "${id}"
             record: { numLove: ${n+1} }
           ) {
@@ -423,13 +480,15 @@ export default {
         console.log(error);
       });
     },
-    async incrementHaha(id) {
-      let query = `query { messageById(_id: "${id}") { numHaha } }`;
+    async incrementHaha(id, type) {
+      let query = `query { ${type}ById(_id: "${id}") { numHaha } }`;
       axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(async response => {
-        let n = response.data.data.messageById.numHaha;
+        let n;
+        if (type == 'message') n = response.data.data.messageById.numHaha;
+        else if (type == 'ratingHist') n = response.data.data.ratingHistById.numHaha;
 
         query = `mutation {
-          messageUpdateById(
+          ${type}UpdateById(
             _id: "${id}"
             record: { numHaha: ${n+1} }
           ) {
@@ -446,13 +505,15 @@ export default {
         console.log(error);
       });
     },
-    async incrementSad(id) {
-      let query = `query { messageById(_id: "${id}") { numSad } }`;
+    async incrementSad(id, type) {
+      let query = `query { ${type}ById(_id: "${id}") { numSad } }`;
       axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(async response => {
-        let n = response.data.data.messageById.numSad;
+        let n;
+        if (type == 'message') n = response.data.data.messageById.numSad;
+        else if (type == 'ratingHist') n = response.data.data.ratingHistById.numSad;
 
         query = `mutation {
-          messageUpdateById(
+          ${type}UpdateById(
             _id: "${id}"
             record: { numSad: ${n+1} }
           ) {
@@ -482,6 +543,10 @@ export default {
       const author = this.authors.find( ({ _id }) => _id === id );
       return author !== undefined ? author : { firstName: 'N/A', lastName: ''}; // bug #todo
     },
+    song(id) {
+      const song = this.songs.find( ({ _id }) => _id === id );
+      return song !== undefined ? song : { title: 'N/A'};
+    },
     handleResize() {
       this.window.width = window.innerWidth;
     },
@@ -492,6 +557,7 @@ export default {
             _id
             text,
             publishedAt,
+            createdAt
             authorId
             numLike
             numLove
@@ -505,6 +571,31 @@ export default {
         }).catch(error => {
           console.log(error);
         });
+    },
+    async getRatingActivityFromFriends() {
+      const query = `query {
+        findFriendsRating(id: "${this.$store.getters.loggedInUserId}") {
+          _id
+          createdAt
+          rating
+          review
+          songId
+          userId
+          authorId: userId
+          numLike
+          numLove
+          numHaha
+          numSad
+        }
+      }`;
+      return axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
+        this.activitiesRating = response.data.data.findFriendsRating;
+        this.authors = this.authors.concat(this.activitiesRating.map(a => a.userId));
+        this.songs = [...new Set(this.activitiesRating.map(a => a.songId))];
+        this.activities = this.activities.concat(this.activitiesRating);
+      }).catch(error => {
+        console.log(error);
+      });
     },
     async getPostsFromFriends() {
       let query = `
@@ -579,6 +670,24 @@ export default {
         console.log(error);
       });
     },
+    async getUniqueSongs() {
+      const unique = this.songs.filter((value, index, self) => self.indexOf(value) === index);
+      const query = `query {
+        findSongs(
+          songIds: [${unique.map(x => `"` + x + `"`)}]
+        ) {
+          _id
+          title
+          artist
+          album
+        }
+      }`;
+      axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
+        this.songs = response.data.data.findSongs;
+      }).catch(error => {
+        console.log(error);
+      });
+    }
   },
   computed: {
     sortedPosts: function() {
@@ -602,7 +711,9 @@ export default {
       post: '',
       posts: [],
       activities: [],
+      activitiesRating: [],
       authors: [],
+      songs: [],
       showReactMenu: [],
       showReactMenu2: [],
       showCommentDiv: [],
