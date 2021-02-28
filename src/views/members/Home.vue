@@ -591,7 +591,7 @@ export default {
       return axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
         this.activitiesRating = response.data.data.findFriendsRating;
         this.authors = this.authors.concat(this.activitiesRating.map(a => a.userId));
-        this.songs = [...new Set(this.activitiesRating.map(a => a.songId))];
+        this.songs = this.activitiesRating.map(a => a.songId);
         this.activities = this.activities.concat(this.activitiesRating);
       }).catch(error => {
         console.log(error);

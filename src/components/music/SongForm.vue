@@ -206,7 +206,7 @@ export default {
         ) {
           recordId
         }
-      }`; console.log(query);
+      }`;
       await axios.post(process.env.VUE_APP_API || apiUrl, { query });
       this.showFeedback = true;
     }

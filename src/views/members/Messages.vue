@@ -454,7 +454,7 @@ export default {
         });
 
         this.messages = response.data.data.findFriendsPost;
-        this.people = [...new Set(this.messagesSent.map(a => a.recipientId))];
+        this.people = this.messagesSent.map(a => a.recipientId).filter((value, index, self) => self.indexOf(value) === index);
       }).catch(error => {
         console.log(error);
       });
@@ -493,7 +493,8 @@ export default {
         });
 
         this.messages = this.messages.concat(response.data.data.findFriendsPost);
-        this.people = this.people.concat([...new Set(this.messagesReceived.map(a => a.authorId))]);
+        this.people = this.people.concat(this.messagesReceived.map(a => a.authorId).
+          filter((value, index, self) => self.indexOf(value) === index));
       }).catch(error => {
         console.log(error);
       });

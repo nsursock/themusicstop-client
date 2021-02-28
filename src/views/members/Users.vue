@@ -306,10 +306,12 @@ export default {
       return 'facetime-audio://' + this.member.email; // #todo add phone number
     },
     numLocations() {
-      return [...new Set(this.table.rows.map(x => x.city + ', ' + x.country))].length;
+      return this.table.rows.map(x => x.city + ', ' + x.country).
+        filter((value, index, self) => self.indexOf(value) === index).length;
     },
     averageAge() {
-      return +(this.table.rows.reduce((total, next) => total + this.getAge(next.birthday), 0) / this.table.rows.length).toFixed();
+      return +(this.table.rows.reduce((total, next) =>
+        total + this.getAge(next.birthday), 0) / this.table.rows.length).toFixed();
     },
     numBoys() {
       return this.table.rows.filter(x => x.gender === 'M').length;
