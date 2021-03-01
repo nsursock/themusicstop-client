@@ -171,6 +171,7 @@
       <router-link v-bind:class="$route.name === 'Messages' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" block px-3 py-2 rounded-md text-base font-medium" v-bind:to="{ name: 'Messages' }">Messages</router-link>
       <!-- <router-link v-bind:class="$route.name === 'About' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" block px-3 py-2 rounded-md text-base font-medium" v-bind:to="{ name: 'About' }">About</router-link> -->
       <router-link v-bind:class="$route.name === 'Users' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" block px-3 py-2 rounded-md text-base font-medium" v-bind:to="{ name: 'Users' }">Members</router-link>
+      <router-link v-bind:class="$route.name === 'Songs' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" block px-3 py-2 rounded-md text-base font-medium" v-bind:to="{ name: 'Songs' }">Music</router-link>
       <div class="bg-gray-700">
         <span v-if="isLoggedIn" class="flex items-center justify-center">
           <button v-on:click="handleLogout" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Log out</button>
@@ -643,6 +644,13 @@ export default {
             recordId
           }
         }`;
+        await axios.post(process.env.VUE_APP_API || apiUrl, { query });
+      }).then( async () => {
+        let query = 'mutation { messageCreateOne( record: {\n';
+        query += `text: """Welcome to The Music Stop! This is your wall. You can publish and comment easily.""",\n`;
+        query += `publishedAt: "${new Date()}",\n`;
+        query += `authorId: "${this.$store.getters.loggedInUserId}"\n`;
+        query += '} ) { recordId } }';
         await axios.post(process.env.VUE_APP_API || apiUrl, { query });
       })
       .catch(err => console.log(err));

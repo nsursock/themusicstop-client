@@ -70,7 +70,7 @@
   </div>
 </div>
 
-    <div v-show="window.width >= 1024 || showNews" class="lg:w-6/12 w-full xl:w-7/12 border-r border-gray-300 divide-y divide-gray-300 overflow-hidden overflow-y-auto">
+    <div v-show="window.width >= 1024 || showNews" class="lg:w-6/12 w-full xl:w-7/12 border-r border-gray-300 divide-y divide-gray-300 overflow-hidden overflow-y-auto h-screen">
       <div class="flex items-center justify-between m-3">
         News feed
         <div class="float-right flex items-center">
