@@ -1,6 +1,6 @@
 <template>
   <div v-on:refreshPage="refreshPage" class="mb-5">
-    <Heading />
+    <Heading v-if="table.rows" :data="table.rows"/>
     <ListTable v-if="table.rows" :table="table" />
     <SlideOver v-on:toggleSlideOver="toggleSlideOver" v-show="showSlideOver" :item="item"/>
     <RatingModal v-on:toggleRatingModal="toggleRatingModal" v-on:toggleFeedbackModal="toggleFeedbackModal" v-show="showModal" :songId="songId"/>

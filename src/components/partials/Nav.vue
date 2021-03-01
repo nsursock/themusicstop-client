@@ -94,6 +94,7 @@
             <router-link v-bind:class="$route.name === 'Messages' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" px-3 py-2 rounded-md text-sm font-medium" v-bind:to="{ name: 'Messages' }">Messages</router-link>
             <!-- <router-link v-bind:class="$route.name === 'About' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" px-3 py-2 rounded-md text-sm font-medium" to="/about">About</router-link> -->
             <router-link v-bind:class="$route.name === 'Users' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" px-3 py-2 rounded-md text-sm font-medium" to="/users">Members</router-link>
+            <router-link v-bind:class="$route.name === 'Songs' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" px-3 py-2 rounded-md text-sm font-medium" to="/songs">Music</router-link>
           </div>
         </div>
       </div>
