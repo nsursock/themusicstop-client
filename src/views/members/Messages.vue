@@ -454,7 +454,8 @@ export default {
         });
 
         this.messages = response.data.data.findFriendsPost;
-        this.people = this.messagesSent.map(a => a.recipientId).filter((value, index, self) => self.indexOf(value) === index);
+        this.people = this.messagesSent.map(a => a.recipientId).
+          filter((value, index, self) => self.indexOf(value) === index);
       }).catch(error => {
         console.log(error);
       });

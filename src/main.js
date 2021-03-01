@@ -15,9 +15,9 @@ export const bus = new Vue();
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!store.getters.loggedIn) {
+    if (!store.getters.loggedIn && to.path !== '/') {
       next({
-        name: 'Home',
+        name: 'Splash',
       })
     } else {
       next()
