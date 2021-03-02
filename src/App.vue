@@ -34,7 +34,7 @@ export default {
       // mobile
       window.addEventListener('scroll', (event) => {
         if (!event.toElement && !event.relatedTarget) {
-          if (window.scrollY === 0) {
+          if (this.isMobile() && window.scrollY === 0) {
             setTimeout(() => {
               this.showPopup = true;
             }, 1000)
@@ -49,6 +49,9 @@ export default {
     }
   },
   methods: {
+    isMobile() {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    },
     emitCloseMenu: function() {
       bus.$emit('closeMenu');
     },
