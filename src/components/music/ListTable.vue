@@ -12,10 +12,10 @@
                 <th v-for="(col, index) in table.cols" :key="index" scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   {{ col }}
                 </th>
-                <th scope="col" class="relative px-6 py-3">
+                <th v-show="$store.getters.loggedIn" scope="col" class="relative px-6 py-3">
                   <span class="sr-only">Edit</span>
                 </th>
-                <th scope="col" class="relative px-6 py-3">
+                <th v-show="$store.getters.loggedIn" scope="col" class="relative px-6 py-3">
                   <span class="sr-only">Rate</span>
                 </th>
               </tr>
@@ -71,10 +71,10 @@
                     {{ row.rating }}
                   </span>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <td v-show="$store.getters.loggedIn" class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <button v-on:click="handleToggle(row._id)" class="text-indigo-600 hover:text-indigo-900">Edit</button>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <td v-show="$store.getters.loggedIn" class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <button v-on:click="handleRating(row._id)" class="text-indigo-600 hover:text-indigo-900">Rate</button>
                 </td>
               </tr>

@@ -15,6 +15,7 @@ import SlideOver from '@/components/music/SlideOver'
 import RatingModal from '@/components/music/RatingModal'
 import FeedbackModal from '@/components/music/FeedbackModal'
 
+import moment from 'moment'
 import { bus } from '@/main'
 import { apiUrl } from '@/env.json'
 import axios from 'axios'
@@ -33,6 +34,7 @@ export default {
     bus.$on('toggleSlideOver', (val) => {
       if (val !== undefined) {
         this.item = this.table.rows.find(item => item._id === val);
+        this.item.releaseDate = moment(this.item.releaseDate).format('MMM DD, YYYY');
       }
       else
         this.item = {
