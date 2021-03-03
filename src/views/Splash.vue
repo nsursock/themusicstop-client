@@ -142,7 +142,7 @@
 </section>
 
 <section class="mb-5 py-12 bg-white">
-<div class="flex flex-col md:flex-row mx-4  items-center md:items-start max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row mx-4 items-center md:items-start max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
   <div class="divide-y divide-gray-300 md:w-1/2 my-auto">
     <div class=" mb-5 w-full flex flex-col justify-center items-center md:items-start">
       <div class="flex-shrink-0 mb-5">
@@ -183,6 +183,47 @@
     <img src="../assets/images/graph.jpg" alt="">
   </div>
 </div>
+</section>
+
+<section class="m-5 p-12 bg-white flex">
+  <div class="w-1/3">
+    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+      Frequently Asked Questions
+    </p>
+    <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+      Can't find the answer you're looking for?
+      Reach out to our <router-link class="text-indigo-700" :to="{ name: 'Contact' }">support</router-link> team.
+    </p>
+  </div>
+  <div class="w-2/3 space-y-6">
+    <div class="">
+      <dt class="text-lg leading-6 font-medium text-gray-900">
+        I can't find a song I want to rate. What should I do?
+      </dt>
+      <dd class="mt-2 text-base text-gray-500">
+        On the <em>Music</em> page, you can add a song using the <em>Add</em> button.
+        Then a panel appears where you can edit the details of the song. Hit save and you're done!
+      </dd>
+    </div>
+    <div class="">
+      <dt class="text-lg leading-6 font-medium text-gray-900">
+        I have a huge music library. Should I add each song one by one?
+      </dt>
+      <dd class="mt-2 text-base text-gray-500">
+        Of course not. On the <em>Music</em> page, you can add a library using the <em>Import</em> button.
+        Then you have to select the XML file containing your iTunes library. Import for Spotify will be done in the near future.
+      </dd>
+    </div>
+    <div class="">
+      <dt class="text-lg leading-6 font-medium text-gray-900">
+        How do I send a message to someone without knowing their username?
+      </dt>
+      <dd class="mt-2 text-base text-gray-500">
+        On the <em>Members</em> page, you can check the profile of someone by clicking on the <em>Profile</em> button.
+        Then you can click on the <em>Message</em> button, and you will be taken to the <em>Messages</em> page.
+      </dd>
+    </div>
+  </div>
 </section>
 
 </div>

@@ -54,7 +54,7 @@
                       Message
                     </label>
                     <div class="mt-1">
-                      <textarea required id="about" name="message" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Your message here."></textarea>
+                      <textarea required id="about" name="message" rows="6" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Your message here."></textarea>
                     </div>
                     <p class="mt-2 text-sm text-gray-500">
 
