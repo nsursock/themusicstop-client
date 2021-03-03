@@ -10,7 +10,7 @@ export default new Vuex.Store({
   state: {
     cryptWorker: new Worker('crypto-worker.js'),
     token: localStorage.getItem('access_token') || null,
-    isProd: process.env.VUE_APP_API !== undefined, // #todo not the right way works tho
+//    isProduction: process.env.VUE_APP_API !== undefined, // #todo not the right way works tho
   },
   getters : {
     loggedIn(state) {

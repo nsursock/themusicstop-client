@@ -12,9 +12,11 @@ Vue.config.productionTip = false
 Vue.prototype.winWidth = window.innerWidth;
 Vue.prototype.winHeight = window.innerHeight;
 
-Vue.use(VueGtag, {
-  config: { id: "G-2M87ZHQY1B" }
-}, router);
+if (process.env.NODE_ENV === 'production') {
+  Vue.use(VueGtag, {
+    config: { id: "G-2M87ZHQY1B" }
+  }, router);
+}
 
 export const bus = new Vue();
 
