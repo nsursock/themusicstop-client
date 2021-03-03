@@ -107,7 +107,7 @@
             <button v-on:click="handleLogout" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Log out</button>
           </span>
           <span v-else>
-            <button v-on:click="toggleModal(), showSignup = true, dataLayer.push({'event': 'signup_started'})" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Sign up</button>
+            <button v-on:click="toggleModal(), showSignup = true, $gtag.event('signup_started', { method: 'navbar' })" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Sign up</button>
             <button v-on:click="toggleModal(), showLogin = true" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Log in</button>
           </span>
         </div>
@@ -177,7 +177,7 @@
           <button v-on:click="handleLogout" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Log out</button>
         </span>
         <span v-else class="flex items-center justify-around">
-          <button v-on:click="toggleModal(), showSignup = true, dataLayer.push({'event': 'signup_started'})" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Sign up</button>
+          <button v-on:click="toggleModal(), showSignup = true, $gtag.event('signup_started', { method: 'navbar' })" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Sign up</button>
           <button v-on:click="toggleModal(), showLogin = true;" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Log in</button>
         </span>
       </div>
@@ -555,7 +555,7 @@ export default {
     bus.$on('start', () => {
       this.toggleModal();
       this.showSignup = true;
-      window.dataLayer.push({'event': 'signup_started'});
+      this.$gtag.event('signup_started', { method: 'other' })
     });
     bus.$on('closeAccount', () => {
       this.toggleModal();
@@ -646,7 +646,7 @@ export default {
           }
         }`;
         await axios.post(process.env.VUE_APP_API || apiUrl, { query });
-        window.dataLayer.push({'event': 'signup_finished'});
+        this.$gtag.event('signup_finished');
       }).then( async () => {
         let query = 'mutation { messageCreateOne( record: {\n';
         query += `text: """Welcome to The Music Stop! This is your wall. You can publish and comment easily.""",\n`;

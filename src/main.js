@@ -4,12 +4,17 @@ import router from './router'
 import './assets/styles/index.css';
 import store from './store';
 import LoadScript from 'vue-plugin-load-script';
+import VueGtag from "vue-gtag";
 
 Vue.use(LoadScript);
 Vue.config.productionTip = false
 
 Vue.prototype.winWidth = window.innerWidth;
 Vue.prototype.winHeight = window.innerHeight;
+
+Vue.use(VueGtag, {
+  config: { id: "G-2M87ZHQY1B" }
+}, router);
 
 export const bus = new Vue();
 
