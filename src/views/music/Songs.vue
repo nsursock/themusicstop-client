@@ -61,8 +61,10 @@ export default {
     });
   },
   async mounted() {
+    this.isLoading = true;
     await this.getTableFromApi();
-    this.getArtwork();
+    await this.getArtwork();
+    this.isLoading = false;
   },
   methods: {
     toggleSlideOver() {
@@ -94,7 +96,6 @@ export default {
           label
         }
       }`;
-      this.isLoading = true;
       return axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
         this.table = {
           rows: response.data.data.songMany,
@@ -121,13 +122,12 @@ export default {
           const arr = r.data.data.ratingMany.map(s => { return s.rating });
           const avg = arr.reduce( ( a, b ) => a + b, 0 ) / arr.length;
           this.$set(item, 'rating', arr.length > 0 ? +avg.toFixed() : 'N/A');
-          this.isLoading = false;
         });
       }).catch(error => {
         console.log(error);
       });
     },
-    getArtwork() {
+    async getArtwork() {
       this.table.rows.forEach(async (song) => {
         this.$set(song, 'artworkUrl', await albumArt( song.artist, {album: song.album, size: 'small'} ));
       });
