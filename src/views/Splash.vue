@@ -216,6 +216,16 @@
     </div>
     <div class="">
       <dt class="text-lg leading-6 font-medium text-gray-900">
+        I can't find my iTunes XML library file! How come?
+      </dt>
+      <dd class="mt-2 text-base text-gray-500">
+        By default, iTunes does not generate an XML file. In <em>iTunes</em>, you have to go to the <em>Advanced</em> tab,
+        and check the box <em>Share iTunes library XML</em>. Normally, the file should be located here:
+        <em>(home folder)/Music/iTunes</em>.
+      </dd>
+    </div>
+    <div class="">
+      <dt class="text-lg leading-6 font-medium text-gray-900">
         How do I send a message to someone without knowing their username?
       </dt>
       <dd class="mt-2 text-base text-gray-500">
