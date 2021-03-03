@@ -185,8 +185,8 @@
 </div>
 </section>
 
-<section class="m-5 p-12 bg-white flex">
-  <div class="w-1/3">
+<section class="m-5 p-12 bg-white flex flex-col md:flex-row">
+  <div class="md:w-1/3 mb-8">
     <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
       Frequently Asked Questions
     </p>
@@ -195,7 +195,7 @@
       Reach out to our <router-link class="text-indigo-700" :to="{ name: 'Contact' }">support</router-link> team.
     </p>
   </div>
-  <div class="w-2/3 space-y-6">
+  <div class="md:w-2/3 space-y-6">
     <div class="">
       <dt class="text-lg leading-6 font-medium text-gray-900">
         I can't find a song I want to rate. What should I do?
