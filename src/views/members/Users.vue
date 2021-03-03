@@ -324,9 +324,9 @@ export default {
       return this.table.rows.filter(x => x.gender === 'F').length;
     }
   },
-  mounted() {
+  async mounted() {
     this.isLoading = true;
-    this.getTableFromApi();
+    await this.getTableFromApi();
     this.isLoading = false;
   },
   methods: {
