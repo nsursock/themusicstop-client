@@ -555,7 +555,7 @@ export default {
     bus.$on('start', () => {
       this.toggleModal();
       this.showSignup = true;
-      dataLayer.push({'event': 'signup_started'});
+      window.dataLayer.push({'event': 'signup_started'});
     });
     bus.$on('closeAccount', () => {
       this.toggleModal();
@@ -646,7 +646,7 @@ export default {
           }
         }`;
         await axios.post(process.env.VUE_APP_API || apiUrl, { query });
-        dataLayer.push({'event': 'signup_finished'});
+        window.dataLayer.push({'event': 'signup_finished'});
       }).then( async () => {
         let query = 'mutation { messageCreateOne( record: {\n';
         query += `text: """Welcome to The Music Stop! This is your wall. You can publish and comment easily.""",\n`;
