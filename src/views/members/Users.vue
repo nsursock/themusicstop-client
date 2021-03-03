@@ -1,6 +1,8 @@
 <template>
 <div>
 
+  <LoadingModal v-show="isLoading" :isLoading="isLoading" />
+
   <div class="lg:flex lg:items-center lg:justify-between mx-8 my-4">
     <div v-if="table.rows" class="flex-1 min-w-0">
       <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
@@ -262,6 +264,7 @@
 </template>
 
 <script>
+import LoadingModal from '@/components/LoadingModal'
 import ListTable from '@/components/ListTable.vue';
 import ListCard from '@/components/ListCard'
 import { apiUrl } from '@/env.json'
@@ -271,11 +274,12 @@ export default {
   name: 'Users',
   components: {
     ListTable,
-    ListCard
+    ListCard,
+    LoadingModal
   },
   data() {
     return {
-      //tableLoaded: false,
+      isLoading: false,
       table: { },
       isViewTable: false,
       showProfileSlide: false,
@@ -321,7 +325,9 @@ export default {
     }
   },
   mounted() {
+    this.isLoading = true;
     this.getTableFromApi();
+    this.isLoading = false;
   },
   methods: {
     sendMessage: function() {

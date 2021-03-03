@@ -5,6 +5,20 @@ module.exports = {
   presets: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    extend: {
+      keyframes: {
+         'wiggle': {
+           '0%, 100%': { transform: 'rotate(-3deg)' },
+           '50%': { transform: 'rotate(3deg)' },
+         }
+      },
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',
+        'slide-in-right': 'transition-all ease-in-out duration-1000 transform translate-x-0',
+        'wiggle': 'wiggle 1s ease-in-out infinite',
+        'bounce-once': 'bounce 0.8s'
+      }
+    },
     screens: {
       sm: '640px',
       md: '768px',

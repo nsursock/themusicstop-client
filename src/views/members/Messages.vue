@@ -1,6 +1,8 @@
 <template lang="html">
   <div class="">
 
+    <LoadingModal v-show="isLoading" :isLoading="isLoading" />
+
     <div v-show="showModal" class="fixed z-10 inset-0 overflow-y-auto">
       <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <!--
@@ -297,8 +299,12 @@
 import axios from 'axios'
 import { apiUrl } from '@/env.json'
 import moment from 'moment'
+import LoadingModal from '@/components/LoadingModal'
 
 export default {
+  components: {
+    LoadingModal
+  },
   filters: {
     formatDate(date, format) {
       return moment.utc(date).format(format);
@@ -328,18 +334,21 @@ export default {
       thread: '',
       receiver: '',
 
-      numFlagged: undefined
+      numFlagged: undefined,
+      isLoading: false,
     }
   },
   async mounted() {
+    this.isLoading = true;
     await this.getMessagesSent();
     await this.getMessagesReceived();
     await this.getUniquePeople();
-    this.$refs.mbox[0].focus();
-
     this.numFlagged = this.messages.filter((item) => {
       return item.flagged === true; }).length;
+    this.isLoading = false;
 
+    this.$refs.mbox[0].focus();
+    
     if (this.$route.query.email) {
         this.recipient = this.$route.query.email;
         this.showModal = true;

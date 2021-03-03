@@ -1,6 +1,8 @@
 <template lang="html">
   <div class=" mx-auto flex flex-col lg:flex-row w-screen h-screen">
 
+    <LoadingModal v-show="isLoading" :isLoading="isLoading"/>
+
     <div class="lg:w-2/12 w-full border-r border-gray-300 hidden lg:block">
       <div class="flex items-center justify-start space-x-2 mt-2 px-5 ml-4">
         <button @click="showPublish = true" type="button" class="w-48 lg:mr-4 lg:mt-3  inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -382,8 +384,12 @@
 import moment from 'moment'
 import { apiUrl } from '@/env.json'
 import axios from 'axios'
+import LoadingModal from '@/components/LoadingModal'
 
 export default {
+  components: {
+    LoadingModal
+  },
   filters: {
     formatDate(date, format) {
       return moment.utc(date).format(format);
@@ -394,6 +400,7 @@ export default {
     this.handleResize();
   },
   async mounted() {
+    this.isLoading = true;
     await this.getPostsFromFriends();
     await this.getActivityFromFriends();
     await this.getRatingActivityFromFriends();
@@ -402,6 +409,7 @@ export default {
     });
     this.getUniqueAuthors();
     this.getUniqueSongs();
+    this.isLoading = false;
 
     this.posts.forEach((item, index) => {
       this.showReactMenu[index] = false;
@@ -723,6 +731,7 @@ export default {
       showNews: true,
       showActivity: false,
       showDropdown: false,
+      isLoading: false,
     }
   }
 }

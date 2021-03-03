@@ -5,6 +5,7 @@
     <SlideOver v-on:toggleSlideOver="toggleSlideOver" v-show="showSlideOver" :item="item"/>
     <RatingModal v-on:toggleRatingModal="toggleRatingModal" v-on:toggleFeedbackModal="toggleFeedbackModal" v-show="showModal" :songId="songId"/>
     <FeedbackModal v-on:refreshPage="toggleFeedbackModal" v-show="showFeedback"/>
+    <LoadingModal v-show="isLoading" :isLoading="isLoading"/>
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import Heading from '@/components/music/Heading'
 import SlideOver from '@/components/music/SlideOver'
 import RatingModal from '@/components/music/RatingModal'
 import FeedbackModal from '@/components/music/FeedbackModal'
+import LoadingModal from '@/components/LoadingModal'
 
 import moment from 'moment'
 import { bus } from '@/main'
@@ -28,7 +30,8 @@ export default {
     ListTable,
     SlideOver,
     RatingModal,
-    FeedbackModal
+    FeedbackModal,
+    LoadingModal
   },
   created () {
     bus.$on('toggleSlideOver', (val) => {
@@ -91,6 +94,7 @@ export default {
           label
         }
       }`;
+      this.isLoading = true;
       return axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
         this.table = {
           rows: response.data.data.songMany,
@@ -117,6 +121,7 @@ export default {
           const arr = r.data.data.ratingMany.map(s => { return s.rating });
           const avg = arr.reduce( ( a, b ) => a + b, 0 ) / arr.length;
           this.$set(item, 'rating', arr.length > 0 ? +avg.toFixed() : 'N/A');
+          this.isLoading = false;
         });
       }).catch(error => {
         console.log(error);
@@ -192,6 +197,7 @@ export default {
 
   data() {
     return {
+      isLoading: false,
       table: {},
       item: {},
       songId: null,
