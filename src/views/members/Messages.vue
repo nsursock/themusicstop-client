@@ -174,7 +174,7 @@
               {{ person(message.authorId).firstName }} {{ person(message.authorId).lastName }}
             </span>
             <span class="text-xs text-gray-600">
-              {{ message.publishedAt | formatDate('MMM D, YY') }} at {{ message.publishedAt | formatDate('h:mm A') }}
+              {{ message.createdAt | formatDate('MMM D, YY') }} at {{ message.createdAt | formatDate('h:mm A') }}
             </span>
           </div>
           <div class="flex flex-col ">
@@ -267,7 +267,7 @@
                   <!-- <span class="text-gray-600"> wrote</span> -->
                 </p>
                 <div class="flex items-center">
-                  <span class="text-sm text-gray-600">{{ message.publishedAt | formatDate('MMM D, YY') }} at {{ message.publishedAt | formatDate('h:mm A') }}</span>
+                  <span class="text-sm text-gray-600">{{ message.createdAt | formatDate('MMM D, YY') }} at {{ message.createdAt | formatDate('h:mm A') }}</span>
                   <div class="">
                     <svg v-if="!person(message.authorId).profileImage" class="ml-5 h-9 w-9 rounded-full object-cover text-gray-300 bg-gray-600" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -348,7 +348,7 @@ export default {
     this.isLoading = false;
 
     this.$refs.mbox[0].focus();
-    
+
     if (this.$route.query.email) {
         this.recipient = this.$route.query.email;
         this.showModal = true;
@@ -416,7 +416,7 @@ export default {
         query  = 'mutation { messageCreateOne( record: {\n';
         query += `text: """${encryptedText}""",\n`;
         query += `subject: """${this.subject}""",\n`;
-        query += `publishedAt: "${new Date()}",\n`;
+        query += `createdAt: "${new Date()}",\n`;
         query += `authorId: "${this.$store.getters.loggedInUserId}",\n`;
         query += `recipientId: "${recipientId}"\n`;
         query += '} ) { recordId } }';
@@ -434,7 +434,7 @@ export default {
           _id,
           text,
           subject,
-          publishedAt,
+          createdAt,
           talkerId: recipientId
           recipientId
           authorId
@@ -484,7 +484,7 @@ export default {
           _id,
           text,
           subject,
-          publishedAt,
+          createdAt,
           talkerId: authorId
           recipientId
           authorId
@@ -529,10 +529,10 @@ export default {
         });
       else
         t = this.messages.slice().sort((a, b) => {
-          return new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime();
+          return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
         });
       return t.sort((a, b) => {
-        let td = new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime();
+        let td = new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
         return this.sortAsc ? td : -td;
       });
     },
@@ -540,7 +540,7 @@ export default {
       return this.threadsFiltered.filter((item) => {
         return item.subject === this.thread;
       }).sort((a, b) => {
-        let td = new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime();
+        let td = new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
         return this.sortAsc2 ? td : -td;
       });
     }

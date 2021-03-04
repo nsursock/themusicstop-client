@@ -57,12 +57,15 @@
                 What's on your mind? This message will be available publicly so be careful what you publish.
               </p>
             </div>
-            <textarea v-model="post" id="about" name="about" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder=""></textarea>
+            <textarea v-model="postText" id="text" name="text" rows="5" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" placeholder=""></textarea>
           </div>
         </div>
       </div>
       <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-        <button @click="handlePublish" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-purple-600 text-base font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:ml-3 sm:w-auto sm:text-sm">
+        <button v-show="!postId" @click="handlePublish" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-purple-600 text-base font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:ml-3 sm:w-auto sm:text-sm">
+          Post
+        </button>
+        <button v-show="postId" @click="handleEdit" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-purple-600 text-base font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:ml-3 sm:w-auto sm:text-sm">
           Post
         </button>
         <button @click="showPublish = false" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
@@ -130,13 +133,13 @@
   -->
   <div v-show="showReactMenu[index]" class="z-10 origin-top-left absolute left-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
     <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-      <button @click="showPublish = true, messageId = index, toggleReactMenu(index);" href="#" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+      <button @click="showPublish = true, messageIndex = index, toggleReactMenu(index);" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
         <svg class="h-6 w-6 fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M14 22.5L11.2 19H6a1 1 0 0 1-1-1V7.103a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1h-5.2L14 22.5zm1.839-5.5H21V8.103H7V17H12.161L14 19.298 15.839 17zM2 2h17v2H3v11H1V3a1 1 0 0 1 1-1z"/></svg>
         Comment
       </button>
-      <button href="#" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+      <button disabled class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
         <svg class="h-6 w-6 fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 14h-2a8.999 8.999 0 0 0-7.968 4.81A10.136 10.136 0 0 1 3 18C3 12.477 7.477 8 13 8V2.5L23.5 11 13 19.5V14zm-2-2h4v3.308L20.321 11 15 6.692V10h-2a7.982 7.982 0 0 0-6.057 2.773A10.988 10.988 0 0 1 11 12z"/></svg>
-        Share
+        Share (soon)
       </button>
       <button @click="incrementLike(post._id, 'message')" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
         <svg class="h-6 w-6 fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -162,13 +165,21 @@
         </svg>
         Sad
       </button>
+      <button @click="showPublish = true, showReactMenu[index] = false, setupEdit(post._id, post.text)" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+        <svg class="h-6 w-6 fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M15.728 9.686l-1.414-1.414L5 17.586V19h1.414l9.314-9.314zm1.414-1.414l1.414-1.414-1.414-1.414-1.414 1.414 1.414 1.414zM7.242 21H3v-4.243L16.435 3.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L7.243 21z"/></svg>
+        Edit
+      </button>
+      <button @click="handleDelete(post._id)" class="w-full flex items-center block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+        <svg class="h-6 w-6 fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M17 6h5v2h-2v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8H2V6h5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3zm1 2H6v12h12V8zm-9 3h2v6H9v-6zm4 0h2v6h-2v-6zM9 4v2h6V4H9z"/></svg>
+        Delete
+      </button>
     </div>
   </div>
 </div>
 
             <div class="flex items-center justify-end">
               <div class="flex flex-col">
-                <span class="text-sm text-gray-600">{{ post.publishedAt | formatDate('MMM D, YY') }} at {{ post.publishedAt | formatDate('h:mm A') }}</span>
+                <span class="text-sm text-gray-600">{{ post.updatedAt | formatDate('MMM D, YY') }} at {{ post.updatedAt | formatDate('h:mm A') }}</span>
                 <span class="text-gray-500 text-right">{{ author(post.authorId).firstName }} {{ author(post.authorId).lastName }}</span>
               </div>
               <svg v-if="!author(post.authorId).profileImage" class="ml-5 h-9 w-9 rounded-full object-cover text-gray-300 bg-gray-600" fill="currentColor" viewBox="0 0 24 24">
@@ -215,7 +226,7 @@
                   <div class=" m-3 ">
                     <aside class="flex float-right ml-2 mb-1">
                       <div class="flex flex-col">
-                        <span class="text-sm text-gray-600">{{ comment.publishedAt | formatDate('MMM D, YY') }} at {{ comment.publishedAt | formatDate('h:mm A') }}</span>
+                        <span class="text-sm text-gray-600">{{ comment.updatedAt | formatDate('MMM D, YY') }} at {{ comment.updatedAt | formatDate('h:mm A') }}</span>
                         <span class="text-gray-500 text-right">{{ author(comment.authorId).firstName }} {{ author(comment.authorId).lastName }}</span>
                       </div>
                       <svg v-if="!author(comment.authorId).profileImage" class="ml-5 h-9 w-9 rounded-full object-cover text-gray-300 bg-gray-600" fill="currentColor" viewBox="0 0 24 24">
@@ -566,8 +577,8 @@ export default {
         query {
           findFriendsPost(id: "${this.$store.getters.loggedInUserId}", type: "comment") {
             _id
-            text,
-            publishedAt,
+            text
+            updatedAt
             createdAt
             authorId
             numLike
@@ -613,8 +624,8 @@ export default {
         query {
           findFriendsPost(id: "${this.$store.getters.loggedInUserId}", type: "post") {
             _id
-            text,
-            publishedAt,
+            text
+            updatedAt
             authorId
             numLike
             numLove
@@ -630,7 +641,7 @@ export default {
               messageMany(filter: { messageId: "${item._id}" }) {
                 _id
                 text
-                publishedAt
+                updatedAt
                 authorId
               }
             }`;
@@ -645,12 +656,11 @@ export default {
     },
     async handlePublish() {
       let msgId = null;
-      if (this.messageId !== null)
-        msgId = this.posts[this.messageId]._id;
+      if (this.messageIndex !== null)
+        msgId = this.posts[this.messageIndex]._id;
 
       let query = 'mutation { messageCreateOne( record: {\n';
-      query += `text: """${this.post}""",\n`;
-      query += `publishedAt: "${new Date()}",\n`;
+      query += `text: """${this.postText}""",\n`;
       query += `authorId: "${this.$store.getters.loggedInUserId}",\n`;
       if (msgId !== null) query += `messageId: "${msgId}"\n`;
       query += '} ) { recordId } }';
@@ -662,8 +672,31 @@ export default {
       } catch (error) {
         console.log(error);
       } finally {
-        this.messageId = null;
+        this.messageIndex = null;
       }
+    },
+    setupEdit(id, text) {
+      this.postText = text;
+      this.postId = id;
+    },
+    async handleEdit() {
+      const query = `mutation {
+        messageUpdateById(_id: "${this.postId}", record: { text: """${this.postText}""" }) {
+          recordId
+        }
+      }`;
+      this.showPublish = false;
+      await axios.post(process.env.VUE_APP_API || apiUrl, { query });
+      this.isFinished = true;
+      this.postId = this.postText = null;
+    },
+    async handleDelete(id) {
+      const query = `mutation {
+        messageRemoveById(_id: "${id}") {
+          recordId
+        }
+      }`;
+      await axios.post(process.env.VUE_APP_API || apiUrl, { query });
     },
     async getUniqueAuthors() {
       const unique = this.authors.filter((value, index, self) => self.indexOf(value) === index);
@@ -705,23 +738,24 @@ export default {
   computed: {
     sortedPosts: function() {
       return this.posts.slice().sort((a, b) => {
-        let tmp = new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime();
+        let tmp = new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime();
         return this.sortedAsc ? tmp : -tmp;
       });
     },
-    sortedComments: function() {
-      return this.comments.slice().sort((a, b) => {
-        let tmp = new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime();
-        return this.sortedAsc ? tmp : -tmp;
-      });
-    }
+    // sortedComments: function() {
+    //   return this.comments.slice().sort((a, b) => {
+    //     let tmp = new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime();
+    //     return this.sortedAsc ? tmp : -tmp;
+    //   });
+    // }
   },
   data() {
     return {
       window: {
         width: window.innerWidth,
       },
-      post: '',
+      postText: '',
+      postId: null,
       posts: [],
       activities: [],
       activitiesRating: [],
@@ -731,7 +765,7 @@ export default {
       showReactMenu2: [],
       showCommentDiv: [],
       showPublish: false,
-      messageId: null,
+      messageIndex: null,
       sortedAsc: true,
       showNews: true,
       showActivity: false,
