@@ -245,7 +245,7 @@
     <div class="mt-8 lex lg:mt-0 lg:flex-shrink-0 lg:w-1/2 mr-5 sm:mr-0">
       <form action="https://formspree.io/f/xjvplbll" method="POST" class="md:flex md:justify-end">
         <div class="max-w-sm mx-auto md:mx-0 p-1 pr-0 flex flex-col sm:flex-row">
-          <input id='email' required name="_replyto" type="email" placeholder="yourmail@example.com" class="m-2 w-full sm:w-2/3 lg:w-90  appearance-none rounded shadow p-3 text-grey-dark mr-2 focus:outline-none" />
+          <input id='email' required name="_replyto" type="email" placeholder="yourmail@example.com" class="m-2 w-full sm:w-2/3 lg:w-90  appearance-none rounded-md shadow-md p-3 text-grey-dark mr-2 focus:outline-none border border-transparent" />
           <button @click="$gtag.event('new_subscriber', { method: 'splash' })" value="Send" type="submit" class="m-2 w-full sm:w-1/3 lg:w-40 bg-purple-600 text-white text-base font-semibold rounded-md shadow-md hover:bg-purple-700 p-3">
             Notify Me
           </button>

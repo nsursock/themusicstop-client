@@ -14,7 +14,7 @@ import ListTable from '@/components/music/ListTable'
 import Heading from '@/components/music/Heading'
 import SlideOver from '@/components/music/SlideOver'
 import RatingModal from '@/components/music/RatingModal'
-import FeedbackModal from '@/components/music/FeedbackModal'
+import FeedbackModal from '@/components/FeedbackModal'
 import LoadingModal from '@/components/LoadingModal'
 
 import moment from 'moment'

@@ -2,6 +2,7 @@
   <div class=" mx-auto flex flex-col lg:flex-row w-screen h-screen">
 
     <LoadingModal v-show="isLoading" :isLoading="isLoading"/>
+    <FeedbackModal v-show="isFinished" v-on:refreshPage="isFinished = false" />
 
     <div class="lg:w-2/12 w-full border-r border-gray-300 hidden lg:block">
       <div class="flex items-center justify-start space-x-2 mt-2 px-5 ml-4">
@@ -178,7 +179,7 @@
           </div>
           <div class="">
             <div class="flex flex-col m-3 w-10/12">
-              <span>{{ post.text }}</span>
+              <span v-linkified v-html="post.text" />
 
               <div class="flex mt-5 text-gray-700 items-center">
                 <svg class="h-6 w-6 fill-current mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -222,7 +223,7 @@
                       </svg>
                       <img v-else class="ml-5 h-9 w-9 rounded-full object-cover" :src="author(comment.authorId).profileImage" alt="">
                     </aside>
-                    <p>{{ comment.text }}</p>
+                    <p v-linkified v-html="comment.text"/>
                   </div>
                 </div>
               </div>
@@ -385,10 +386,12 @@ import moment from 'moment'
 import { apiUrl } from '@/env.json'
 import axios from 'axios'
 import LoadingModal from '@/components/LoadingModal'
+import FeedbackModal from '@/components/FeedbackModal'
 
 export default {
   components: {
-    LoadingModal
+    LoadingModal,
+    FeedbackModal
   },
   filters: {
     formatDate(date, format) {
@@ -653,7 +656,9 @@ export default {
       query += '} ) { recordId } }';
 
       try {
+        this.showPublish = false;
         await axios.post(process.env.VUE_APP_API || apiUrl, { query });
+        this.isFinished = true;
       } catch (error) {
         console.log(error);
       } finally {
@@ -732,7 +737,17 @@ export default {
       showActivity: false,
       showDropdown: false,
       isLoading: false,
+      isFinished: false,
     }
   }
 }
 </script>
+
+<style media="screen">
+.linkified {
+  text-decoration: underline;
+  /* background-color: indigo;
+  color: white;
+  padding: 1px; */
+}
+</style>

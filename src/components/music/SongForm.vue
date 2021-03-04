@@ -24,7 +24,7 @@
           <label for="title" class="block text-sm font-medium ">Title</label>
         </dt>
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 my-auto">
-          <input v-model="item.title" type="text" name="title" id="title" autocomplete="title" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+          <input required v-model="item.title" type="text" name="title" id="title" autocomplete="title" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
         </dd>
       </div>
       <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -32,7 +32,7 @@
           <label for="artist" class="block text-sm font-medium ">Artist</label>
         </dt>
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 my-auto">
-          <input v-model="item.artist" type="text" name="artist" id="artist" autocomplete="artist" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+          <input required v-model="item.artist" type="text" name="artist" id="artist" autocomplete="artist" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
         </dd>
       </div>
       <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -40,7 +40,7 @@
           <label for="album" class="block text-sm font-medium ">Album</label>
         </dt>
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 my-auto">
-          <input v-model="item.album" type="text" name="album" id="album" autocomplete="album" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+          <input required v-model="item.album" type="text" name="album" id="album" autocomplete="album" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
         </dd>
       </div>
       <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -48,7 +48,7 @@
           <label for="genre" class="block text-sm font-medium ">Genre</label>
         </dt>
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 my-auto">
-          <input v-model="item.genre" type="text" name="genre" id="genre" autocomplete="genre" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+          <input required v-model="item.genre" type="text" name="genre" id="genre" autocomplete="genre" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
         </dd>
       </div>
       <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -56,7 +56,7 @@
           <label for="time" class="block text-sm font-medium ">Time</label>
         </dt>
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 my-auto">
-          <input v-model="item.time" type="text" name="time" id="time" autocomplete="time" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+          <input required v-model="item.time" type="text" name="time" id="time" autocomplete="time" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
         </dd>
       </div>
 
@@ -65,7 +65,7 @@
           <label for="track-number" class="block text-sm font-medium ">Track #</label>
         </dt>
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 my-auto">
-          <input v-model="item.trackNumber" type="text" name="track-number" id="track-number" autocomplete="track-number" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+          <input required v-model="item.trackNumber" type="text" name="track-number" id="track-number" autocomplete="track-number" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
         </dd>
       </div>
       <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -73,7 +73,7 @@
           <label for="release-date" class="block text-sm font-medium ">Release Date</label>
         </dt>
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 my-auto">
-          <input v-model="item.releaseDate" type="text" name="release-date" id="release-date" autocomplete="release-date" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+          <input required v-model="item.releaseDate" type="text" name="release-date" id="release-date" autocomplete="release-date" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
         </dd>
       </div>
       <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -81,7 +81,7 @@
           <label for="record-label" class="block text-sm font-medium ">Record Label</label>
         </dt>
         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 my-auto">
-          <input v-model="item.label" type="text" name="record-label" id="record-label" autocomplete="record-label" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+          <input required v-model="item.label" type="text" name="record-label" id="record-label" autocomplete="record-label" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
         </dd>
       </div>
 
@@ -153,7 +153,7 @@
 <script>
 import { apiUrl } from '@/env.json'
 import axios from 'axios'
-import FeedbackModal from './FeedbackModal'
+import FeedbackModal from '../FeedbackModal'
 export default {
   components: {
     FeedbackModal
