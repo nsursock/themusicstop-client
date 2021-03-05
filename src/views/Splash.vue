@@ -198,7 +198,7 @@
   <div class="md:w-2/3 space-y-6">
     <div class="">
       <dt class="text-lg leading-6 font-medium text-gray-900">
-        I can't find a song I want to rate. What should I do?
+        How do I rate a song which is not in the database?
       </dt>
       <dd class="mt-2 text-base text-gray-500">
         On the <em>Music</em> page, you can add a song using the <em>Add</em> button.
@@ -207,21 +207,21 @@
     </div>
     <div class="">
       <dt class="text-lg leading-6 font-medium text-gray-900">
-        I have a huge music library. Should I add each song one by one?
+        How do I add my huge music library?
       </dt>
       <dd class="mt-2 text-base text-gray-500">
-        Of course not. On the <em>Music</em> page, you can add a library using the <em>Import</em> button.
+        On the <em>Music</em> page, you can add a library using the <em>Import</em> button.
         Then you have to select the XML file containing your iTunes library. Import for Spotify will be done in the near future.
       </dd>
     </div>
     <div class="">
       <dt class="text-lg leading-6 font-medium text-gray-900">
-        I can't find my iTunes XML library file! How come?
+        Where do I find the iTunes XML library file?
       </dt>
       <dd class="mt-2 text-base text-gray-500">
-        By default, iTunes does not generate an XML file. In <em>iTunes</em>, you have to go to the <em>Advanced</em> tab,
+        By default, iTunes does not generate an XML file. In <em>iTunes</em>' preferences, you have to go to the <em>Advanced</em> tab,
         and check the box <em>Share iTunes library XML</em>. Normally, the file should be located here:
-        <em>(home folder)/Music/iTunes</em>.
+        <em>Home Folder > Music > iTunes</em>.
       </dd>
     </div>
     <div class="">
@@ -231,6 +231,16 @@
       <dd class="mt-2 text-base text-gray-500">
         On the <em>Members</em> page, you can check the profile of someone by clicking on the <em>Profile</em> button.
         Then you can click on the <em>Message</em> button, and you will be taken to the <em>Messages</em> page.
+      </dd>
+    </div>
+    <div class="">
+      <dt class="text-lg leading-6 font-medium text-gray-900">
+        How do I leave a testimonial?
+      </dt>
+      <dd class="mt-2 text-base text-gray-500">
+        On the <em>Contact</em> page, start your message by specifying your text is a testimonial.
+        Testimonials will be featured randomly around the website. After receiving your message, you might
+        be asked for a picture to display next to the testimonial.
       </dd>
     </div>
   </div>
