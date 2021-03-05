@@ -236,7 +236,8 @@
             <div class=" mt-6 mx-4">
               <div class="text-sm text-gray-500 flex flex-col mt-5 break-words w-4/5 sm:w-full text-justify">
                 <span>Bio</span>
-                <span class="text-gray-700 mr-3 sm:mr-0">{{ member.about }}</span>
+                <span v-if="member.about && member.about !== 'null'" class="text-gray-700 mr-3 sm:mr-0">{{ member.about }}</span>
+                <span v-else class="text-gray-700 mr-3 sm:mr-0">No short description provided yet.</span>
               </div>
               <div class="text-sm text-gray-500 flex flex-col mt-5">
                 <span>Location</span>
@@ -244,7 +245,8 @@
               </div>
               <div class="text-sm text-gray-500 flex flex-col mt-5">
                 <span>Website</span>
-                <span class="text-gray-700">{{ member.website }}</span>
+                <span v-if="member.website && member.website !== 'null'" class="text-gray-700 mr-3 sm:mr-0">{{ member.website }}</span>
+                <span v-else class="text-gray-700 mr-3 sm:mr-0">No website provided yet.</span>
               </div>
               <div class="text-sm text-gray-500 flex flex-col mt-5">
                 <span>Birthday</span>

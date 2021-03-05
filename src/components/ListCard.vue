@@ -13,8 +13,8 @@
           </div>
         </div>
       </div>
-      <div class="max-w-md mx-auto bg-white sm:rounded-tl-xl rounded-t-xl shadow-xl overflow-hidden sm:max-w-2xl">
-        <div class="flex flex-col sm:flex-row md:hidden block">
+      <div class="max-w-md mx-auto bg-white sm:rounded-tl-xl rounded-t-xl shadow-xl overflow-hidden sm:max-w-2xl sm:h-56 sm:w-screen md:h-0 md:w-0">
+        <div class="flex flex-col sm:flex-row md:hidden block h-full">
           <div v-lazyi class="sm:flex-shrink-0">
             <img v-if="elem.coverImage" class="h-48 sm:h-full w-full object-cover sm:w-48" :data-src="elem.coverImage" alt="">
             <img v-else class="h-48 sm:h-full w-full object-cover sm:w-48" data-src="http://source.unsplash.com/640x480/?landscape" alt="">
@@ -35,8 +35,8 @@
               {{ elem.firstName }} {{ elem.lastName }}
             </a>
             <p class="mt-2 text-gray-500">
-              <span v-if="elem.about">{{ elem.about.substring(0, 180) }}...</span>
-              <span v-else>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+              <span v-if="elem.about && elem.about !== 'null'">{{ elem.about.substring(0, 170) }}...</span>
+              <span v-else>No short description provided yet.</span>
             </p>
           </div>
         </div>
