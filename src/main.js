@@ -43,5 +43,3 @@ new Vue({
   router,
   components: { App }
 }).$mount('#app')
-
-//console.log(process.env);
