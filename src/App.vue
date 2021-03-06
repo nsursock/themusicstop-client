@@ -4,7 +4,7 @@
     <NotificationCard
     class="animate-bounce-once" v-show=" index === currentIndex" v-for="(card, index) in details" :key="index" :details="card"/>
     <div @click="emitCloseMenu">
-      <router-view></router-view>
+      <router-view class="z-0"></router-view>
     </div>
     <ExitIntentPopup @toggleExitPopup="toggleExitPopup" v-show="showPopup && !$store.getters.loggedIn"/>
     <FooterSection />

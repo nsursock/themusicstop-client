@@ -2,7 +2,7 @@
 <div>
 
   <!-- navbar -->
-<nav class="bg-gray-800 ">
+<nav class="bg-gray-800 overflow-hidden">
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
     <div class="relative flex items-center justify-between h-16">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -86,7 +86,7 @@
           </svg>
           <span class="hidden sm:block ml-3 text-gray-300 text-lg font-semibold tracking-wide leading-relaxed">The Music Stop</span>
         </router-link>
-        <div class="hidden sm:block sm:ml-6">
+        <div class="hidden sm:block sm:ml-6 overflow-x-auto sm:w-3/5">
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <router-link v-bind:class="$route.name === 'Networks' ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'" class=" px-3 py-2 rounded-md text-sm font-medium" v-bind:to="{ name: 'Networks' }">Networks</router-link>
@@ -99,16 +99,31 @@
         </div>
       </div>
       <!-- right navbar -->
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto md:ml-6 md:pr-0">
 
         <div class="hidden sm:block">
           <span v-if="isLoggedIn">
             <!-- <span class="px-3 py-2 rounded-md text-sm font-medium text-gray-300">{{ loggedInEmail }}</span> -->
-            <button v-on:click="handleLogout" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Log out</button>
+            <button v-on:click="handleLogout" class="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+              <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="none" d="M0 0h24v24H0z"/><path d="M4 18h2v2h12V4H6v2H4V3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3zm2-7h7v2H6v3l-5-4 5-4v3z"/>
+              </svg>
+              <span class="ml-2 lg:block hidden">Log out</span>
+            </button>
           </span>
-          <span v-else>
-            <button v-on:click="toggleModal(), showSignup = true, $gtag.event('signup_started', { method: 'navbar' })" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Sign up</button>
-            <button v-on:click="toggleModal(), showLogin = true" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Log in</button>
+          <span v-else class="flex items-center justify-center">
+            <button v-on:click="toggleModal(), showSignup = true, $gtag.event('signup_started', { method: 'navbar' })" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white flex items-center">
+              <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="none" d="M0 0h24v24H0z"/><path d="M14 14.252v2.09A6 6 0 0 0 6 22l-2-.001a8 8 0 0 1 10-7.748zM12 13c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm6 6v-3h2v3h3v2h-3v3h-2v-3h-3v-2h3z"/>
+              </svg>
+              <span class="ml-2 sm:hidden lg:block">Sign up</span>
+            </button>
+            <button v-on:click="toggleModal(), showLogin = true" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white flex items-center">
+              <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="none" d="M0 0h24v24H0z"/><path d="M4 15h2v5h12V4H6v5H4V3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6zm6-4V8l5 4-5 4v-3H2v-2h8z"/>
+              </svg>
+              <span class="ml-2 sm:hidden lg:block">Log in</span>
+            </button>
           </span>
         </div>
 
@@ -121,14 +136,16 @@
         </button>
 
         <!-- Profile dropdown -->
-        <div class="z-20 ml-3 relative" v-show="isLoggedIn">
+        <div class="ml-3 relative" v-show="isLoggedIn">
           <div>
             <button v-on:click="toggleMemberMenu" class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-haspopup="true">
               <span class="sr-only">Open user menu</span>
-              <svg v-if="!loggedInProfileImg" class="h-8 w-8 rounded-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-              <img v-else class="h-8 w-8 rounded-full" v-bind:src="loggedInProfileImg" alt="">
+              <div class="w-8">
+                <svg v-if="!loggedInProfileImg" class="h-8 w-8 rounded-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <img v-else class="h-8 w-8 rounded-full" v-bind:src="loggedInProfileImg" alt="">
+              </div>
             </button>
           </div>
           <!--
@@ -141,7 +158,7 @@
               From: "transform opacity-100 scale-100"
               To: "transform opacity-0 scale-95"
           -->
-          <div v-show="showMemberMenu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+          <div v-show="showMemberMenu" class="z-10 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
             <!-- <router-link class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" :to="{ name: 'Profile', params: {} }">Profile</router-link> -->
             <router-link class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" :to="{ name: 'Settings', params: {} }">Settings</router-link>
             <button @click="toggleModal(), showPassword = true" class="text-left w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Change password</button>
