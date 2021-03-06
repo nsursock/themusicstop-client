@@ -7,13 +7,19 @@
     </div>
     <img v-else class="object-cover w-12 h-12 rounded-full" :src="details.profileImage" alt="">
     <div class="flex flex-col ml-3 items-start justify-center">
-      <span class="text-sm text-gray-800">
-        {{ details.firstName }} {{ details.lastName.substring(0,1) }}. ({{ details.city }}, {{ details.country }}) created an account
-      </span>
+      <button @click="$emit('closeNotif')" class="absolute top-0 right-0 m-2" type="button">
+        <svg class="w-6 h-6 stroke-current text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </button>
       <span class="text-sm text-gray-500">
         <!-- {{ details.createdAt | formatDate('MMM D, YY') }} at {{ details.createdAt | formatDate('h:mm A') }} -->
         {{ details.createdAt | fromNow }}
       </span>
+      <span class="text-sm text-gray-800">
+        {{ details.firstName }} {{ details.lastName.substring(0,1) }}. ({{ details.city }}, {{ details.country }}) created an account
+      </span>
+
     </div>
   </div>
 </template>

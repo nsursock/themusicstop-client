@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <Nav />
-    <NotificationCard
-    class="animate-bounce-once" v-show=" index === currentIndex" v-for="(card, index) in details" :key="index" :details="card"/>
-    <div @click="emitCloseMenu">
-      <router-view class="z-0"></router-view>
+    <Nav class=""/>
+    <div @click="emitCloseMenu" class="">
+      <router-view class=""></router-view>
     </div>
     <ExitIntentPopup @toggleExitPopup="toggleExitPopup" v-show="showPopup && !$store.getters.loggedIn"/>
     <FooterSection />
+    <NotificationCard v-on:closeNotif="showNotif = false" class="animate-bounce-once" v-show="showNotif && index === currentIndex" v-for="(card, index) in details" :key="index" :details="card"/>
   </div>
 </template>
+
 <script>
 import Nav from './components/partials/Nav'
 import FooterSection from './components/FooterSection'
@@ -73,7 +73,7 @@ export default {
   data () {
     return {
       showPopup: false,
-      showNotif: false,
+      showNotif: true,
       details: [],
       currentIndex: 0,
     }
