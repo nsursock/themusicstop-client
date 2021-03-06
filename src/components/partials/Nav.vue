@@ -304,12 +304,14 @@
             </h3>
             <div class="mt-2">
               <p class="text-sm text-gray-500 text-center">
-                Enter a world of music where you will find people are the most important asset. And remember, there's a support/contact page should you have questions.
+                Add at least a profile and cover image. You can also add a short
+                bio and your website. Completing your profile grants
+                you points to show how much you contributed to the website.
               </p>
             </div>
           </div>
           <div class="flex flex-col md:flex-row items-center justify-start mt-2 px-5">
-            <router-link to="/users" @click.native="toggleModal" class="w-48 lg:mt-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <router-link to="/users" @click.native="toggleModal" class="w-48 lg:mt-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               <span class="mx-auto">Make Friends</span>
             </router-link>
             <router-link to="/settings" @click.native="toggleModal" class="mt-2 md:mt-0 md:ml-2 w-48 lg:mt-3  inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
