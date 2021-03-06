@@ -286,7 +286,7 @@
 
       <button v-show="divSelected !== 'nav' && isMobile" @click="divSelected === 'msg' ? divSelected = 'conv' : divSelected = 'nav'"
       class="fixed bottom-0 right-0 m-4 inline-flex items-center px-2 py-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-        <span class="sr-only">Sort ascending</span>
+        <span class="sr-only">Back button</span>
         <svg class="h-6 w-6 text-gray-600 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
         </svg>

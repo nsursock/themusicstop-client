@@ -112,7 +112,7 @@
           </span>
         </div>
 
-        <button v-show="isLoggedIn" class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+        <button @click="$emit('toggleNotifications')" v-show="isLoggedIn" class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
           <span class="sr-only">View notifications</span>
           <!-- Heroicon name: bell -->
           <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
