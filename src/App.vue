@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Nav class=""/>
+    <Nav class="z-50 relative"/>
     <div @click="emitCloseMenu" class="">
       <router-view class=""></router-view>
     </div>
