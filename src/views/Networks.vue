@@ -1,5 +1,8 @@
 <template>
 <div id="main" class="h-screen w-screen mx-auto relative overflow-auto">
+
+<LoadingModal v-show="isLoading" :isLoading="isLoading"/>
+
   <!-- <button v-on:click="tick(10)" type="button" name="button" class="border-black border-2 absolute z-50">Step</button> -->
   <!-- <div class="absolute z-50 p-2 shadow-md rounded-lg text-xs mt-5">
     <span>#nodes: {{nodes.length}}</span>&nbsp;
@@ -42,6 +45,7 @@
 <script>
 import { apiUrl } from '@/env.json'
 import axios from 'axios'
+import LoadingModal from '@/components/LoadingModal'
 
 var Vector = function(x, y) {
   this.x = x;
@@ -81,9 +85,14 @@ Vector.prototype.norm = function() {
 };
 
 export default {
+  components: {
+    LoadingModal
+  },
   async mounted() {
+    this.isLoading = true;
     await this.setNodes();
     await this.setEdges();
+    this.isLoading = false;
 
     let iter = 0;
     let timestep = 1, tickstep = 10;
@@ -255,6 +264,8 @@ export default {
       maxSpeed: 2,
       minEnergyThreshold: 60,//this.winWidth <= 640 || this.winHeight <= 640 ? 75 : 70,
       maxNumIterations: 400,
+
+      isLoading: false,
 
       // Gravity: 1.1,
       // Force: 1000
