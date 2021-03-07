@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="fixed bottom-0 left-0 z-50 rounded-lg shadow-lg border border-gray-100 bg-gray-50 flex items-center justify-around p-4 mx-3 my-4 w-11/12 sm:w-2/5 md:w-5/12 lg:w-4/12 xl:w-3/12">
+  <div class="fixed bottom-0 left-0 z-50 rounded-lg shadow-lg border border-gray-100 bg-gray-50 flex items-center justify-start p-4 mx-3 my-4 w-11/12 sm:w-2/5 md:w-5/12 lg:w-4/12 xl:w-3/12">
     <div v-if="!details.profileImage" class="">
       <svg class="h-12 w-12 rounded-full object-cover text-gray-300 bg-gray-600" fill="currentColor" viewBox="0 0 24 24">
         <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
