@@ -509,7 +509,7 @@ export default {
         console.log(error);
       });
     },
-    saveProfileInfo: function() {
+    async saveProfileInfo() {
       const query = `
         mutation {
           userUpdateOne(
@@ -523,14 +523,15 @@ export default {
             recordId
           }
       }`;
-      axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+      await axios.post(process.env.VUE_APP_API || apiUrl, { query });
+      // axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
+      //   console.log(response.data);
+      // })
+      // .catch(error => {
+      //   console.log(error);
+      // });
     },
-    savePersonalInfo: function() {
+    async savePersonalInfo() {
       const query = `
         mutation {
           userUpdateOne(
@@ -550,12 +551,13 @@ export default {
             recordId
           }
       }`;
-      axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+      await axios.post(process.env.VUE_APP_API || apiUrl, { query });
+      // axios.post(process.env.VUE_APP_API || apiUrl, { query }).then(response => {
+      //   console.log(response.data);
+      // })
+      // .catch(error => {
+      //   console.log(error);
+      // });
     }
   },
 };
