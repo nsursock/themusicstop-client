@@ -43,9 +43,12 @@ export default {
         this.details = response.data.data.userMany;
     });
 
-    setInterval(() => {
-      this.currentIndex = Math.floor(Math.random() * (this.details.length - 1));
-      // if (!this.showNotif) clearInterval(timer);
+    var index = 0;
+    var timer = setInterval(() => {
+      // this.currentIndex = Math.floor(Math.random() * (this.details.length - 1));
+      this.currentIndex = index;
+      index = (index + 1) % this.details.length;
+      if (!this.showNotif) clearInterval(timer);
     }, 5000);
   },
   created() {
