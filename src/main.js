@@ -6,6 +6,9 @@ import store from './store';
 import LoadScript from 'vue-plugin-load-script';
 import VueGtag from "vue-gtag";
 
+import VueScrollTo from 'vue-scrollto'
+Vue.use(VueScrollTo)
+
 import linkify from 'vue-linkify'
 Vue.directive('linkified', linkify)
 
