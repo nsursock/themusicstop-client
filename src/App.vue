@@ -29,7 +29,7 @@ export default {
   },
   async mounted() {
     const query = `query {
-      userMany {
+      userMany(sort: _ID_DESC) {
         firstName
         lastName
         city
@@ -43,11 +43,9 @@ export default {
         this.details = response.data.data.userMany;
     });
 
-    var index = 0;
     var timer = setInterval(() => {
       // this.currentIndex = Math.floor(Math.random() * (this.details.length - 1));
-      this.currentIndex = index;
-      index = (index + 1) % this.details.length;
+      this.currentIndex = (this.currentIndex + 1) % this.details.length;
       if (!this.showNotif) clearInterval(timer);
     }, 5000);
   },
@@ -78,7 +76,7 @@ export default {
       showPopup: false,
       showNotif: true,
       details: [],
-      currentIndex: 0,
+      currentIndex: -1,
     }
   },
   methods: {

@@ -270,11 +270,18 @@
                 <div class="flex items-center">
                   <span class="text-sm text-gray-600">{{ message.createdAt | formatDate('MMM D, YY') }} at {{ message.createdAt | formatDate('h:mm A') }}</span>
                   <div class="">
-                    <svg v-if="!person(message.talkerId).profileImage" class="ml-5 h-9 w-9 rounded-full object-cover text-gray-300 bg-gray-600" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                    <img v-else-if="person(message.recipientId) && currMbox === 'Sent'" class="ml-5 h-9 w-9 rounded-full object-cover" :src="person(message.recipientId).profileImage">
-                    <img v-else-if="person(message.authorId)" class="ml-5 h-9 w-9 rounded-full object-cover" :src="person(message.authorId).profileImage" alt="">
+                    <div v-if="currMbox === 'Sent'" class="">
+                      <img v-if="person(message.recipientId).profileImage" class="ml-5 h-9 w-9 rounded-full object-cover" :src="person(message.recipientId).profileImage">
+                      <svg v-else class="ml-5 h-9 w-9 rounded-full object-cover text-gray-300 bg-gray-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                      </svg>
+                    </div>
+                    <div v-else class="">
+                      <img v-if="person(message.authorId).profileImage" class="ml-5 h-9 w-9 rounded-full object-cover" :src="person(message.authorId).profileImage" alt="">
+                      <svg v-else class="ml-5 h-9 w-9 rounded-full object-cover text-gray-300 bg-gray-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
