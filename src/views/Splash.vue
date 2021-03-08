@@ -185,7 +185,7 @@
 </div>
 </section>
 
-<section id="faq" class="m-5 p-12 bg-white flex flex-col md:flex-row">
+<section id="faq" class="m-5 p-12 bg-white flex flex-col md:flex-row max-w-7xl mx-auto">
   <div class="md:w-1/3 mb-8 mr-5">
     <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
       Frequently Asked Questions
