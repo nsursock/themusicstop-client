@@ -27,10 +27,6 @@ export default {
     ExitIntentPopup,
     NotificationCard
   },
-  // destroyed() {
-  //   if (!this.$store.getters.remember)
-  //     this.$store.dispatch('destroyToken');
-  // },
   async mounted() {
     const query = `query {
       userMany(sort: _ID_DESC) {
