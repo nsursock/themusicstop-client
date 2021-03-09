@@ -8,6 +8,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    rememberMe: true,
     cryptWorker: new Worker('crypto-worker.js'),
     token: localStorage.getItem('access_token') || null,
 //    isProduction: process.env.VUE_APP_API !== undefined, // #todo not the right way works tho
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     },
     loggedInUserEmail(state) {
       return jwt_decode(state.token).email;
+    },
+    remember(state) {
+      return state.rememberMe;
     }
   },
   mutations: {
@@ -29,6 +33,9 @@ export default new Vuex.Store({
     },
     destroyToken(state) {
       state.token = null;
+    },
+    remember(state, bool) {
+      state.rememberMe = bool;
     }
   },
   actions: {
@@ -134,6 +141,9 @@ export default new Vuex.Store({
           reject(error);
         });
       });
+    },
+    rememberMe(context, data) {
+      context.commit('remember', data.remember);
     }
   }
 })

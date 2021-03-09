@@ -10,7 +10,7 @@
   </div> -->
   <div @focus="toggleCard" v-for="node in nodes" :key="node.key" class="z-10 rounded-full absolute focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
   v-bind:style="{ left: node.pos.x + 'px', top: node.pos.y + 'px' }">
-    <div class="w-10 border-2 border-gray-300 rounded-full overflow-hidden flex justify-center items-center">
+    <div class="w-10 h-10 border-2 border-gray-300 rounded-full overflow-hidden flex justify-center items-center">
       <img v-if="node.profileImage" :src="node.profileImage" class="h-full w-full object-cover" />
       <svg v-else class="text-gray-300 bg-gray-600 rounded-full" fill="currentColor" viewBox="0 0 24 24">
         <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />

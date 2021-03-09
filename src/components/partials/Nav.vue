@@ -261,7 +261,7 @@
             </div>
             <div class="flex flex-col sm:flex-row items-center justify-between ">
               <div class="flex items-center">
-                <input id="remember_me" name="remember_me" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                <input v-model="rememberMe" id="remember_me" name="remember_me" type="checkbox" checked class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
                 <label for="remember_me" class="ml-2 block text-sm text-gray-900">
                   Remember me
                 </label>
@@ -531,6 +531,7 @@ export default {
         city: '',
         country: ''
       },
+      rememberMe: true,
 
       current: '',
       password1: '',
@@ -627,7 +628,7 @@ export default {
     },
 
     handleLogout: function() {
-      this.$router.push('/')
+      this.$router.push('/') // todo check route
         .then( () => {
           this.$store.dispatch('destroyToken');
         }).catch(err => console.log(err));
@@ -637,6 +638,7 @@ export default {
         username: this.user.username,
         password: this.user.password
       }).then( () => {
+        this.$store.dispatch('rememberMe', { remember: this.rememberMe });
         this.showModal = false;
         this.$router.push({ name: 'Home' })
       }).catch(err => console.log(err));

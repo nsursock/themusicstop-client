@@ -27,6 +27,10 @@ export default {
     ExitIntentPopup,
     NotificationCard
   },
+  // destroyed() {
+  //   if (!this.$store.getters.remember)
+  //     this.$store.dispatch('destroyToken');
+  // },
   async mounted() {
     const query = `query {
       userMany(sort: _ID_DESC) {
@@ -50,6 +54,11 @@ export default {
     }, 5000);
   },
   created() {
+    // window.addEventListener("beforeunload", () => {
+    //   if (!this.$store.getters.remember)
+    //     this.$store.dispatch('destroyToken');
+    // });
+
     document.addEventListener("DOMContentLoaded", () => {
       // desktop
       document.addEventListener("mouseout", (event) => {
@@ -59,6 +68,7 @@ export default {
           }, 1000)
         }
       });
+
       // mobile
       window.addEventListener('scroll', (event) => {
         if (!event.toElement && !event.relatedTarget) {
