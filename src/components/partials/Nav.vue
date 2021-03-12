@@ -359,7 +359,7 @@
                 </div>
 
                 <div v-show="showErrorMsg" class="text-xs text-red-700">
-                  Something went wrong. Check your information.
+                  Something went wrong. Check your information. Username or email might already be in use.
                 </div>
 
               <div  class="flex items-center justify-center space-x-3">
