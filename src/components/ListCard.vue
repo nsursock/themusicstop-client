@@ -28,7 +28,7 @@
             </div>
           </div>
           <div class="p-8 mt-16 sm:ml-16 sm:mt-0">
-            <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+            <div v-if="elem.city" class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
               {{ elem.birthday | getAge }} • {{ elem.gender }} • {{ elem.city}}, {{ elem.country }}
             </div>
             <a href="#" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">

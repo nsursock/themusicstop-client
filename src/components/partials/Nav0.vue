@@ -304,15 +304,16 @@
             </h3>
             <div class="mt-2">
               <p class="text-sm text-gray-500 text-center">
-                Completing your profile grants you points to show how much you contributed to the website.
-                You should add at least your birthday, gender and location.
+                Add at least a profile and cover image. You can also add a short
+                bio and your website. Completing your profile grants
+                you points to show how much you contributed to the website.
               </p>
             </div>
           </div>
           <div class="flex flex-col md:flex-row items-center justify-start mt-2 px-5">
-            <!-- <router-link to="/users" @click.native="toggleModal" class="w-48 lg:mt-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <router-link to="/users" @click.native="toggleModal" class="w-48 lg:mt-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               <span class="mx-auto">Make Friends</span>
-            </router-link> -->
+            </router-link>
             <router-link to="/settings" @click.native="toggleModal" class="mt-2 md:mt-0 md:ml-2 w-48 lg:mt-3  inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               <span class="mx-auto">Complete Profile</span>
             </router-link>
@@ -334,6 +335,7 @@
           </div>
 
             <form class="mt-8 space-y-6" @submit.prevent="handleSignup">
+              <div v-show="currentStep === 1" class="">
                 <input type="hidden" name="remember" value="true">
                 <div class="rounded-md shadow-sm -space-y-px">
                   <div>
@@ -357,12 +359,37 @@
                     <input v-model="user.password" id="password2" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password">
                   </div>
                 </div>
+              </div>
 
-                <div v-show="showErrorMsg" class="text-xs text-red-700">
-                  Something went wrong. Check your information.
-                </div>
+              <div v-show="currentStep === 2" class="">
+                  <div class="flex items-center justify-center space-x-2 py-2 h-10 border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 border rounded-t-md">
+                    <input v-model="user.gender" type="radio" required id="male" name="gender" value="M" class="ml-3">
+                    <label for="male" class="block text-sm font-medium text-gray-700">Male</label><br>
+                    <input v-model="user.gender" type="radio" required id="female" name="gender" value="F">
+                    <label for="female" class="block text-sm font-medium text-gray-700">Female</label><br>
+                  </div>
+                  <label for="birthday" class="sr-only">Birthday</label>
+                  <input v-model="user.birthday" id="birthday" name="birthday" type="text" required class=" focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 " placeholder="Birthday (yyyy-mm-dd)">
+                  <!-- <input v-model="dob" @focus="type = 'date'" id="birthday" name="birthday" :type="type" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Birthday"> -->
 
-              <div  class="flex items-center justify-center space-x-3">
+                  <label for="city" class="sr-only">City</label>
+                  <input v-model="user.city" type="text" name="city" id="city" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 " placeholder="City">
+                  <label for="country" class="sr-only">Country</label>
+                  <input v-model="user.country" type="text" name="country" id="country" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-b-md" placeholder="Country">
+              </div>
+
+              <div v-show="currentStep !== lastStep" class="flex items-center justify-center space-x-3">
+                <button @click="toggleModal" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                  </span>
+                  Cancel
+                </button>
+                <button v-on:click="currentStep++" type="button" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-purple-700 bg-purple-100 hover:bg-purple-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                  Next
+                </button>
+              </div>
+
+              <div v-show="currentStep === lastStep" class="flex items-center justify-center space-x-3">
                 <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                   <span class="absolute left-0 inset-y-0 flex items-center pl-3">
                     <!-- Heroicon name: lock-closed -->
@@ -372,10 +399,8 @@
                   </span>
                   Submit
                 </button>
-                <button @click="toggleModal" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
-                  <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-                  </span>
-                  Cancel
+                <button v-on:click="currentStep--" type="button" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-purple-700 bg-purple-100 hover:bg-purple-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                  Prev
                 </button>
               </div>
             </form>
@@ -486,7 +511,6 @@ export default {
       showClose: false,
       showPassword: false,
       showModal: false,
-      showErrorMsg: false,
 
       showStep1: true,
       showStep2: false,
@@ -620,13 +644,16 @@ export default {
       }).catch(err => console.log(err));
     },
     handleSignup: function() {
-      this.showErrorMsg = false;
       this.$store.dispatch('register', {
         firstname: this.user.firstname,
         lastname: this.user.lastname,
         email: this.user.email,
         username: this.user.username,
-        password: this.user.password
+        password: this.user.password,
+        birthday: this.user.birthday,
+        gender: this.user.gender,
+        city: this.user.city,
+        country: this.user.country
       }).then( async () => {
         let publicKey = await this.$store.dispatch('getWebWorkerResponse', {messageType: 'generate-keys'});
         let privateKey = await this.$store.dispatch('getWebWorkerResponse', {messageType: 'private-key'});
@@ -649,10 +676,7 @@ export default {
         query += '} ) { recordId } }';
         await axios.post(process.env.VUE_APP_API || apiUrl, { query });
       })
-      .catch(err => {
-        console.log(err)
-        this.showErrorMsg = true;
-      });
+      .catch(err => console.log(err));
     },
 
     async deleteAccount() {

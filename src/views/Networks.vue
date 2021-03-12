@@ -195,15 +195,15 @@ export default {
         .then(response => {
           response.data.data.userMany.forEach((node, index) => {
             this.$set(this.nodes, index, node);
-            node.pos = new Vector(
-              this.winWidth / 2 - this.center,
-              this.winHeight / 2 - this.center
-            );
-
             // node.pos = new Vector(
-            //   Math.round(Math.random() * (this.winWidth - 180)) + this.center,
-            //   Math.round(Math.random() * (this.winHeight - 180)) + this.center
+            //   this.winWidth / 2 - this.center,
+            //   this.winHeight / 2 - this.center
             // );
+
+            node.pos = new Vector(
+              Math.round(Math.random() * (this.winWidth - 180)) + this.center,
+              Math.round(Math.random() * (this.winHeight - 180)) + this.center
+            );
 
             // if (node._id === this.$store.getters.loggedInUserId) {
             //   node.pos = new Vector(

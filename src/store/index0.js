@@ -124,6 +124,10 @@ export default new Vuex.Store({
                 email: "${data.email}"
                 userName: "${data.username}"
                 password: "${data.password}"
+                birthday: "${data.birthday}"
+                gender: "${data.gender}"
+                city: "${data.city}"
+                country: "${data.country}"
               }
             )
           }`;

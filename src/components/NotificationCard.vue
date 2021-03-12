@@ -17,7 +17,9 @@
         {{ details.createdAt | fromNow }}
       </span>
       <span class="text-sm text-gray-800">
-        {{ details.firstName }} {{ details.lastName.substring(0,1) }}. ({{ details.city }}, {{ details.country }}) created an account
+        {{ details.firstName }} {{ details.lastName.substring(0,1) }}.
+        <span v-if="details.city">({{ details.city }}, {{ details.country }}) </span>
+        created an account
       </span>
 
     </div>

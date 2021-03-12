@@ -359,17 +359,17 @@
                   <input v-model="dob" id="birthday" name="birthday" type="date" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
 
-                <div class="col-span-6">
+                <!-- <div class="col-span-6">
                   <label for="street_address" class="block text-sm font-medium text-gray-700">Street address</label>
                   <input v-model="address" type="text" name="street_address" id="street_address" autocomplete="street-address" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                </div>
+                </div> -->
 
                 <div class="col-span-6 sm:col-span-6 lg:col-span-2">
                   <label for="city" class="block text-sm font-medium text-gray-700">City</label>
                   <input v-model="city" type="text" name="city" id="city" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
 
-                <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                <!-- <div class="col-span-6 sm:col-span-3 lg:col-span-2">
                   <label for="state" class="block text-sm font-medium text-gray-700">State / Province</label>
                   <input v-model="state" type="text" name="state" id="state" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
@@ -377,7 +377,7 @@
                 <div class="col-span-6 sm:col-span-3 lg:col-span-2">
                   <label for="postal_code" class="block text-sm font-medium text-gray-700">ZIP / Postal</label>
                   <input v-model="zip" type="text" name="postal_code" id="postal_code" autocomplete="postal-code" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
