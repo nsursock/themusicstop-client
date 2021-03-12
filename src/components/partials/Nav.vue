@@ -628,6 +628,7 @@ export default {
         username: this.user.username,
         password: this.user.password
       }).then( async () => {
+        this.$gtag.event('signup_finished');
         let publicKey = await this.$store.dispatch('getWebWorkerResponse', {messageType: 'generate-keys'});
         let privateKey = await this.$store.dispatch('getWebWorkerResponse', {messageType: 'private-key'});
         const query = `mutation {
@@ -640,7 +641,6 @@ export default {
           }
         }`;
         await axios.post(process.env.VUE_APP_API || apiUrl, { query });
-        this.$gtag.event('signup_finished');
       }).then( async () => {
         let query = 'mutation { messageCreateOne( record: {\n';
         query += `text: """Welcome to The Music Stop! This is your wall. You can publish and comment easily.""",\n`;
