@@ -90,7 +90,7 @@
   <ListTable v-show="isViewTable" v-if="table.rows" :table="table" />
   <ListCard v-show="!isViewTable" v-if="table.rows" :table="table" />
 
-<div v-show="showProfileSlide" class="z-20 fixed inset-0 overflow-hidden">
+<div v-show="showProfileSlide" class="z-50 fixed inset-0 overflow-hidden">
   <div class="absolute inset-0 overflow-hidden">
     <!--
       Background overlay, show/hide based on slide-over state.
